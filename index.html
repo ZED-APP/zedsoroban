@@ -2,339 +2,233 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0f1a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZED Soroban</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-
   <style>
-    /* ------------------ RESET ------------------ */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body { margin: 0; font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #eef3ff; background: radial-gradient(1200px 600px at 10% -10%, rgba(120,150,255,.15), transparent),
-      radial-gradient(1000px 500px at 100% 10%, rgba(255,120,200,.12), transparent),
-      linear-gradient(180deg, #0b0f1a 0%, #151b2e 100%);
-      overflow-x:hidden;
+    /* ===== Fonts ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Amiri&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #fff;
+      overflow-x: hidden;
+      transition: direction 0.3s ease;
+    }
+    body.ar { font-family: 'Amiri', serif; direction: rtl; }
+
+    /* ===== Glass & General ===== */
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    section { padding: 80px 10%; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: sticky; top: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 10%;
+      z-index: 1000;
+      animation: slideDown 0.8s ease-out forwards;
+    }
+    .nav-links a {
+      margin: 0 10px; color: #fff; text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #0ff; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    :root{
-      --glass-bg: rgba(255,255,255,.08);
-      --glass-stroke: rgba(255,255,255,.2);
-      --glass-highlight: rgba(255,255,255,.35);
-      --accent: #8b9dff;
-      --accent-2: #ff99d6;
-      --radius-2xl: 28px;
-      --blur-strong: 18px;
-      --shadow-soft: 0 10px 30px rgba(0,0,0,.35);
-      --shadow-lift: 0 30px 60px rgba(30,40,90,.45);
-      --maxw: 1200px;
-      --trans: 260ms cubic-bezier(.22,1,.36,1); /* iOS-spring-ish */
+    /* ===== Hero ===== */
+    .hero { text-align: center; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      opacity: 0; transform: translateY(40px) scale(0.95);
+      animation: fadeUp 1s ease-out forwards;
+    }
+    .hero .btn {
+      margin: 20px; padding: 12px 24px;
+      border: none; border-radius: 12px;
+      background: linear-gradient(135deg, #06beb6, #48b1bf);
+      color: #fff; cursor: pointer;
+      opacity: 0; transform: translateY(30px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hero .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .hero .btn:nth-child(1) { animation: fadeUp 0.8s ease-out 0.5s forwards; }
+    .hero .btn:nth-child(2) { animation: fadeUp 0.8s ease-out 0.7s forwards; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Arabic mode */
-    body.ar { direction: rtl; text-align: right; font-family: 'Amiri', serif; }
-
-    /* ------------- LIQUID BACKGROUND BLOBS ------------- */
-    .bg-blob{ position: fixed; inset: -200px -200px auto auto; width: 60vmax; height: 60vmax; filter: blur(80px); opacity:.5; z-index:0; pointer-events:none; }
-    .bg-blob.blob-1{ background: radial-gradient(circle at 30% 30%, #8b9dff, transparent 60%); animation: floaty 22s ease-in-out infinite alternate; left:-10vw; top:-10vh; }
-    .bg-blob.blob-2{ background: radial-gradient(circle at 70% 70%, #ff99d6, transparent 60%); animation: floaty 28s ease-in-out 1.2s infinite alternate; right:-10vw; top:20vh; }
-    @keyframes floaty{ from{ transform: translate3d(0,0,0) scale(1);} to{ transform: translate3d(4vw, -2vh, 0) scale(1.15);} }
-
-    /* ------------------ NAV ------------------ */
-    .nav{
-      position: fixed; top: 14px; left: 0; right: 0; z-index: 1000;
-      display:flex; justify-content:center;
+    /* ===== Download Section ===== */
+    .download { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .download .card {
+      flex: 1; min-width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .nav-wrap{
-      display:flex; align-items:center; gap:14px; padding:10px 16px; backdrop-filter: blur(var(--blur-strong));
-      background: linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.04) );
-      border: 1px solid var(--glass-stroke); border-radius: 999px; box-shadow: var(--shadow-soft);
+    .download .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
-    .brand{ display:flex; align-items:center; gap:10px; padding:8px 14px; border-radius: 999px; background: linear-gradient( to bottom, rgba(255,255,255,.14), rgba(255,255,255,.06) ); border:1px solid var(--glass-stroke); }
-    .brand .logo{ width:26px; height:26px; border-radius:10px; background: conic-gradient(from 210deg, #8b9dff, #ff99d6, #8b9dff); filter: saturate(130%); box-shadow: inset 0 0 0 2px rgba(255,255,255,.25), 0 6px 18px rgba(139,157,255,.45); }
-    .brand .title{ font-weight:800; letter-spacing:.5px; }
 
-    .nav a{ padding:8px 12px; border-radius: 999px; color:#eef3ff; text-decoration:none; opacity:.85; transition: var(--trans); border:1px solid transparent; }
-    .nav a:hover{ opacity:1; background: rgba(255,255,255,.10); border-color: var(--glass-stroke); }
+    /* ===== Gallery ===== */
+    .gallery {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%; border-radius: 15px;
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+      filter: brightness(1.1) saturate(1.2);
+    }
 
-    .lang-toggle{ padding:8px 14px; border-radius:999px; border:1px solid var(--glass-stroke); background: rgba(255,255,255,.10); cursor:pointer; color:#fff; transition: var(--trans); backdrop-filter: blur(12px); }
-    .lang-toggle:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+    /* ===== Services ===== */
+    .services {
+      display: flex; gap: 20px; flex-wrap: wrap;
+    }
+    .services .card {
+      flex: 1; min-width: 200px;
+      opacity: 0; transform: translateY(40px);
+      transition: all 0.6s ease;
+    }
+    .services .card.visible { opacity: 1; transform: translateY(0); }
 
-    /* ------------------ HERO ------------------ */
-    .hero{ position: relative; z-index:1; min-height: 100svh; display:grid; place-items:center; padding: 120px 20px 60px; }
-    .hero-inner{ width:min(100%, var(--maxw)); display:grid; grid-template-columns: 1.15fr .85fr; align-items:center; gap: 32px; }
-    @media (max-width: 960px){ .hero-inner{ grid-template-columns: 1fr; text-align:center; } }
+    /* ===== Contact ===== */
+    .contact input, .contact textarea {
+      width: 100%; padding: 10px; margin: 10px 0;
+      border-radius: 8px; border: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .contact input:focus, .contact textarea:focus {
+      box-shadow: 0 0 12px rgba(0, 200, 255, 0.5);
+      transform: scale(1.02);
+      outline: none;
+    }
 
-    .kicker{ opacity:.9; letter-spacing: .12em; text-transform: uppercase; font-weight:600; font-size:12px; margin-bottom:8px; }
-    .headline{ font-weight:800; font-size: clamp(34px, 6vw, 64px); line-height:1.05; text-wrap: balance; }
-    .sub{ margin-top:14px; font-size: clamp(16px, 2.4vw, 20px); opacity:.9; }
+    /* ===== Footer ===== */
+    footer {
+      text-align: center; padding: 20px;
+      opacity: 0; transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+    footer.visible { opacity: 1; transform: translateY(0); }
 
-    .cta-row{ margin-top:26px; display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-start }
-    .glass-btn{ position:relative; padding:12px 18px; border-radius: 16px; border:1px solid var(--glass-stroke); color:#fff; background: linear-gradient( to bottom right, rgba(255,255,255,.16), rgba(255,255,255,.06) ); backdrop-filter: blur(12px); cursor:pointer; transition: transform var(--trans), box-shadow var(--trans); box-shadow: var(--shadow-soft); }
-    .glass-btn:hover{ transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-    .glass-btn:active{ transform: translateY(0); }
-
-    /* Liquid / "Gooey" group for buttons */
-    .goo-wrap{ filter:url(#goo); display:flex; gap:12px; }
-    .goo-bubble{ position:absolute; inset:auto; width:12px; height:12px; border-radius:999px; background: rgba(255,255,255,.25); animation: bubble 2.8s ease-in-out infinite; }
-    .glass-btn:nth-child(1) .goo-bubble{ left:10px; top:-6px; animation-delay:.2s }
-    .glass-btn:nth-child(2) .goo-bubble{ right:16px; top:-8px; animation-delay:.6s }
-    @keyframes bubble{ 0%,100%{ transform: translateY(0) scale(1);} 50%{ transform: translateY(-8px) scale(1.2);} }
-
-    /* Showcase phone card with liquid glass */
-    .phone-card{ position:relative; border-radius: var(--radius-2xl); padding: 18px; border:1px solid var(--glass-stroke); background: linear-gradient( to bottom right, rgba(255,255,255,.14), rgba(255,255,255,.04) ); backdrop-filter: blur(16px); box-shadow: var(--shadow-lift); isolation:isolate; }
-    .phone{ aspect-ratio: 9/19.5; border-radius: 28px; border:1px solid rgba(255,255,255,.25); background: radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.25), transparent 60%), linear-gradient(180deg, rgba(10,12,22,.6) 0%, rgba(10,12,22,.3) 60%, rgba(255,255,255,.06) 100%); position:relative; overflow:hidden; }
-    .phone::after{ content:""; position:absolute; inset:0; background: radial-gradient(120% 60% at 50% -10%, rgba(139,157,255,.25), transparent 50%), radial-gradient(80% 40% at 100% 0%, rgba(255,153,214,.25), transparent 60%); mix-blend: screen; filter: blur(10px); opacity:.7; }
-
-    /* iOS-like dynamic island pulse */
-    .island{ position:absolute; top:10px; left:50%; transform: translateX(-50%); width:44%; height:26px; background:rgba(0,0,0,.55); border-radius:14px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 6px 20px rgba(0,0,0,.45); animation: islandPulse 3.6s ease-in-out infinite; }
-    @keyframes islandPulse{ 0%,100%{ transform: translateX(-50%) scale(1);} 50%{ transform: translateX(-50%) scale(1.04);} }
-
-    /* Roving glass orbs */
-    .orb{ position:absolute; width:120px; height:120px; border-radius:999px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.15)); mix-blend: screen; filter: blur(6px); opacity:.55; animation: orb 14s ease-in-out infinite; }
-    .orb.o1{ top:30%; left:10%; }
-    .orb.o2{ top:60%; left:50%; animation-delay: -3s }
-    .orb.o3{ top:20%; right:10%; animation-delay: -6s }
-    @keyframes orb{ 0%,100%{ transform: translate(0,0) scale(1); } 50%{ transform: translate(14px,-18px) scale(1.08);} }
-
-    /* ------------------ SECTIONS ------------------ */
-    section{ position:relative; z-index:1; padding: 80px 20px; }
-    .container{ width:min(100%, var(--maxw)); margin-inline:auto; }
-
-    .glass-panel{ border-radius: var(--radius-2xl); padding: 24px; border:1px solid var(--glass-stroke); background: linear-gradient( to bottom right, rgba(255,255,255,.14), rgba(255,255,255,.04) ); backdrop-filter: blur(14px); box-shadow: var(--shadow-soft); }
-
-    .grid{ display:grid; gap:18px; }
-    .grid.cols-3{ grid-template-columns: repeat(3, 1fr); }
-    .grid.cols-2{ grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 900px){ .grid.cols-3{ grid-template-columns: 1fr; } .grid.cols-2{ grid-template-columns: 1fr; } }
-
-    .card{ position:relative; overflow:hidden; border-radius: 20px; border:1px solid var(--glass-stroke);
-      background: linear-gradient( to bottom right, rgba(255,255,255,.12), rgba(255,255,255,.05) ); backdrop-filter: blur(12px); padding:18px; transition: transform var(--trans), box-shadow var(--trans); }
-    .card:hover{ transform: translateY(-6px); box-shadow: var(--shadow-lift); }
-    .card h3{ margin: 6px 0 8px; }
-    .card p{ opacity:.9; }
-
-    .chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background: rgba(255,255,255,.12); border:1px solid var(--glass-stroke); font-size:12px; }
-
-    /* ------------------ FOOTER ------------------ */
-    footer{ padding: 26px 20px 60px; text-align:center; opacity:.85 }
-
-    /* ------------------ SCROLL REVEAL ------------------ */
-    .reveal{ transform: translateY(16px); opacity:0; transition: transform 700ms cubic-bezier(.2,.8,.2,1), opacity 700ms ease; will-change: transform, opacity; }
-    .reveal.in{ transform: translateY(0); opacity:1; }
-
-    /* ------------------ PREFERS REDUCED MOTION ------------------ */
-    @media (prefers-reduced-motion: reduce){
-      *{ animation: none !important; transition: none !important; }
+    /* ===== Reveal Animations ===== */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <!-- Liquid / Gooey SVG filter -->
-  <svg width="0" height="0" style="position:absolute">
-    <defs>
-      <filter id="goo">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
-        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -10" result="goo" />
-        <feBlend in="SourceGraphic" in2="goo" />
-      </filter>
-    </defs>
-  </svg>
-
-  <!-- Floating gradient blobs -->
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
-
-  <!-- NAVBAR -->
-  <nav class="nav">
-    <div class="nav-wrap">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="title" data-en="ZED Soroban" data-ar="زد سوروبان">ZED Soroban</div>
-      </div>
-      <a href="#home" data-en="Home" data-ar="الرئيسية">Home</a>
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar glass">
+    <div class="brand">ZED Soroban</div>
+    <div class="nav-links">
       <a href="#download" data-en="Download" data-ar="تحميل">Download</a>
-      <a href="#intro" data-en="Introduction" data-ar="مقدمة">Introduction</a>
-      <a href="#services" data-en="Services" data-ar="خدماتنا">Services</a>
-      <a href="#gallery" data-en="Gallery" data-ar="صور">Gallery</a>
-      <a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
-      <button class="lang-toggle" id="langBtn" aria-label="Toggle language">AR</button>
+      <a href="#gallery" data-en="Gallery" data-ar="معرض">Gallery</a>
+      <a href="#services" data-en="Services" data-ar="خدمات">Services</a>
+      <a href="#contact" data-en="Contact" data-ar="اتصال">Contact</a>
+      <button id="langBtn">AR</button>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <header id="home" class="hero">
-    <div class="hero-inner container">
-      <div class="hero-copy reveal">
-        <div class="kicker" data-en="Smart Abacus Learning" data-ar="تعلم السوروبان الذكي">Smart Abacus Learning</div>
-        <h1 class="headline" data-en="Master soroban with a beautiful, fluid experience" data-ar="أتقن السوروبان بتجربة جميلة وسلسة">Master soroban with a beautiful, fluid experience</h1>
-        <p class="sub" data-en="ZED Soroban for Windows & Android—animations, progress tracking, and gamified practice." data-ar="زد سوروبان لويندوز وأندرويد — رسوم متحركة، تتبع التقدم، وتدريب ممتع.">ZED Soroban for Windows & Android—animations, progress tracking, and gamified practice.</p>
-        <div class="cta-row goo-wrap">
-          <a class="glass-btn" href="#download"><span data-en="Download" data-ar="تحميل">Download</span><span class="goo-bubble"></span></a>
-          <a class="glass-btn" href="#intro"><span data-en="Learn more" data-ar="المزيد">Learn more</span><span class="goo-bubble"></span></a>
-        </div>
-      </div>
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <h1 data-en="Welcome to ZED Soroban" data-ar="مرحبًا بك في زد سوروبان">Welcome to ZED Soroban</h1>
+    <button class="btn" data-en="Download for Windows" data-ar="تحميل للويندوز">Download for Windows</button>
+    <button class="btn" data-en="Download for Android" data-ar="تحميل للأندرويد">Download for Android</button>
+  </section>
 
-      <div class="phone-card reveal">
-        <div class="phone">
-          <div class="island"></div>
-          <div class="orb o1"></div>
-          <div class="orb o2"></div>
-          <div class="orb o3"></div>
-        </div>
-      </div>
+  <!-- ===== Download ===== -->
+  <section id="download" class="download">
+    <div class="card glass reveal">
+      <h2 data-en="Windows App" data-ar="تطبيق الويندوز">Windows App</h2>
+      <p data-en="Fast, reliable desktop app." data-ar="تطبيق سطح مكتب سريع وموثوق.">Fast, reliable desktop app.</p>
     </div>
-  </header>
-
-  <!-- DOWNLOAD -->
-  <section id="download">
-    <div class="container grid cols-2">
-      <div class="glass-panel reveal">
-        <div class="chip">🪟 <span data-en="Windows app" data-ar="تطبيق ويندوز">Windows app</span></div>
-        <h2 style="margin:10px 0 6px" data-en="Get ZED Soroban for Windows" data-ar="حمّل زد سوروبان لويندوز">Get ZED Soroban for Windows</h2>
-        <p data-en="Optimized for keyboard shortcuts and large screens." data-ar="محسّن لاختصارات لوحة المفاتيح والشاشات الكبيرة.">Optimized for keyboard shortcuts and large screens.</p>
-        <div class="cta-row" style="margin-top:16px">
-          <a class="glass-btn" href="#" data-en="Download .EXE" data-ar="تحميل .EXE">Download .EXE</a>
-          <a class="glass-btn" href="#" data-en="Release notes" data-ar="ملاحظات الإصدار">Release notes</a>
-        </div>
-      </div>
-      <div class="glass-panel reveal">
-        <div class="chip">📱 <span data-en="Android app" data-ar="تطبيق أندرويد">Android app</span></div>
-        <h2 style="margin:10px 0 6px" data-en="Get ZED Soroban for Android" data-ar="حمّل زد سوروبان لأندرويد">Get ZED Soroban for Android</h2>
-        <p data-en="Touch-first design with smooth haptics and animations." data-ar="تصميم يعتمد على اللمس مع حركات وانتقالات سلسة.">Touch-first design with smooth haptics and animations.</p>
-        <div class="cta-row" style="margin-top:16px">
-          <a class="glass-btn" href="#" data-en="Google Play" data-ar="متجر جوجل">Google Play</a>
-          <a class="glass-btn" href="#" data-en="APK (sideload)" data-ar="ملف APK">APK (sideload)</a>
-        </div>
-      </div>
+    <div class="card glass reveal">
+      <h2 data-en="Android App" data-ar="تطبيق الأندرويد">Android App</h2>
+      <p data-en="Practice soroban anytime." data-ar="تمرن على السوروبان في أي وقت.">Practice soroban anytime.</p>
     </div>
   </section>
 
-  <!-- INTRODUCTION -->
-  <section id="intro">
-    <div class="container grid cols-2">
-      <div class="reveal">
-        <h2 data-en="Introduction to ZED Soroban" data-ar="مقدمة عن زد سوروبان">Introduction to ZED Soroban</h2>
-        <p style="opacity:.9" data-en="ZED Soroban turns abacus learning into a delightful journey. Interactive tutorials, smooth iOS-style transitions, and liquid glass panels keep your focus where it matters." data-ar="يحوّل زد سوروبان تعلم العداد الياباني إلى رحلة ممتعة. دروس تفاعلية وانتقالات على نمط iOS ولوحات زجاجية سائلة تُبقي تركيزك في المكان الصحيح.">ZED Soroban turns abacus learning into a delightful journey. Interactive tutorials, smooth iOS-style transitions, and liquid glass panels keep your focus where it matters.</p>
-        <ul style="margin-top:8px; line-height:1.9">
-          <li data-en="Guided lessons with progressive difficulty" data-ar="دروس موجهة بصعوبة متدرجة">Guided lessons with progressive difficulty</li>
-          <li data-en="Gamified practice with rewards" data-ar="تدريب مُسَلٍّ مع مكافآت">Gamified practice with rewards</li>
-          <li data-en="Detailed progress tracking" data-ar="تتبع تقدّم مفصّل">Detailed progress tracking</li>
-        </ul>
-      </div>
-      <div class="grid reveal">
-        <div class="card"><h3 data-en="Clean UI" data-ar="واجهة نظيفة">Clean UI</h3><p data-en="Minimal, focus-first layout." data-ar="تصميم بسيط يركّز على المحتوى.">Minimal, focus-first layout.</p></div>
-        <div class="card"><h3 data-en="Fluid motions" data-ar="حركات سلسة">Fluid motions</h3><p data-en="Spring physics and subtle blur." data-ar="حركات نابضة وتمويه لطيف.">Spring physics and subtle blur.</p></div>
-        <div class="card"><h3 data-en="Hybrid learning" data-ar="تعلم هجين">Hybrid learning</h3><p data-en="Windows + Android parity." data-ar="تكافؤ بين ويندوز وأندرويد.">Windows + Android parity.</p></div>
-      </div>
-    </div>
+  <!-- ===== Gallery ===== -->
+  <section id="gallery" class="gallery">
+    <img src="https://via.placeholder.com/400x250" alt="Screenshot" class="reveal">
+    <img src="https://via.placeholder.com/400x250" alt="Screenshot" class="reveal">
+    <img src="https://via.placeholder.com/400x250" alt="Screenshot" class="reveal">
   </section>
 
-  <!-- GALLERY / PANELS WITH IMAGES -->
-  <section id="gallery">
-    <div class="container">
-      <h2 class="reveal" data-en="Gallery" data-ar="صور">Gallery</h2>
-      <div class="grid cols-3">
-        <figure class="card reveal"><img src="https://images.unsplash.com/photo-1523240616393-31fd19575a2d?q=80&w=1200&auto=format&fit=crop" alt="Soroban lesson" style="width:100%; height:220px; object-fit:cover; border-radius:14px"/><figcaption style="margin-top:10px; opacity:.85" data-en="Interactive lessons" data-ar="دروس تفاعلية">Interactive lessons</figcaption></figure>
-        <figure class="card reveal"><img src="https://images.unsplash.com/photo-1494173853739-c21f58b16055?q=80&w=1200&auto=format&fit=crop" alt="Practice screen" style="width:100%; height:220px; object-fit:cover; border-radius:14px"/><figcaption style="margin-top:10px; opacity:.85" data-en="Practice mode" data-ar="وضع التدريب">Practice mode</figcaption></figure>
-        <figure class="card reveal"><img src="https://images.unsplash.com/photo-1528460033278-a6ba57020470?q=80&w=1200&auto=format&fit=crop" alt="Progress charts" style="width:100%; height:220px; object-fit:cover; border-radius:14px"/><figcaption style="margin-top:10px; opacity:.85" data-en="Progress tracking" data-ar="تتبع التقدم">Progress tracking</figcaption></figure>
-      </div>
-    </div>
+  <!-- ===== Services ===== -->
+  <section id="services" class="services">
+    <div class="card glass"><h3 data-en="Tutorials" data-ar="دروس">Tutorials</h3></div>
+    <div class="card glass"><h3 data-en="Gamified Practice" data-ar="تمارين تفاعلية">Gamified Practice</h3></div>
+    <div class="card glass"><h3 data-en="Progress Tracking" data-ar="تتبع التقدم">Progress Tracking</h3></div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="container">
-      <h2 class="reveal" data-en="Our Services" data-ar="خدماتنا">Our Services</h2>
-      <div class="grid cols-3">
-        <div class="card reveal">
-          <div class="chip">📘</div>
-          <h3 data-en="Interactive Tutorials" data-ar="دروس تفاعلية">Interactive Tutorials</h3>
-          <p data-en="Step-by-step guidance with visuals and hints." data-ar="إرشاد خطوة بخطوة مع صور وتلميحات.">Step-by-step guidance with visuals and hints.</p>
-        </div>
-        <div class="card reveal">
-          <div class="chip">🎮</div>
-          <h3 data-en="Gamified Practice" data-ar="تدريب ممتع">Gamified Practice</h3>
-          <p data-en="Achievements, levels, and streaks to stay motivated." data-ar="إنجازات ومستويات وسلاسل تشجيعية للمثابرة.">Achievements, levels, and streaks to stay motivated.</p>
-        </div>
-        <div class="card reveal">
-          <div class="chip">📊</div>
-          <h3 data-en="Progress Tracking" data-ar="تتبع التقدم">Progress Tracking</h3>
-          <p data-en="Charts, insights, and exports for parents & coaches." data-ar="رسوم بيانية وملخصات وتقارير للأهل والمدربين.">Charts, insights, and exports for parents & coaches.</p>
-        </div>
-      </div>
-    </div>
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="contact glass reveal">
+    <h2 data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h2>
+    <form onsubmit="event.preventDefault(); alert('Message sent!');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message"></textarea>
+      <button class="btn" type="submit" data-en="Send" data-ar="إرسال">Send</button>
+    </form>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container grid cols-2">
-      <div class="glass-panel reveal">
-        <h2 data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h2>
-        <p><strong>Email:</strong> <a href="mailto:gamesinogh@gmail.com" style="color:#fff">gamesinogh@gmail.com</a></p>
-        <p data-en="We usually reply within 24–48 hours." data-ar="نرد عادةً خلال 24–48 ساعة.">We usually reply within 24–48 hours.</p>
-      </div>
-      <form class="glass-panel reveal" onsubmit="event.preventDefault(); alert(getText('en')==='EN' ? 'Message sent!' : 'تم الإرسال!')">
-        <div class="grid">
-          <input class="glass-input" type="text" placeholder="Name / الاسم" required style="padding:12px 14px; border-radius:12px; border:1px solid var(--glass-stroke); background:rgba(255,255,255,.06); color:#fff;"/>
-          <input class="glass-input" type="email" placeholder="Email / البريد" required style="padding:12px 14px; border-radius:12px; border:1px solid var(--glass-stroke); background:rgba(255,255,255,.06); color:#fff;"/>
-          <textarea class="glass-input" rows="4" placeholder="Message / الرسالة" required style="padding:12px 14px; border-radius:12px; border:1px solid var(--glass-stroke); background:rgba(255,255,255,.06); color:#fff;"></textarea>
-          <button class="glass-btn" type="submit"><span data-en="Send" data-ar="إرسال">Send</span></button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <small data-en="© 2025 ZED Soroban. All rights reserved." data-ar="© 2025 زد سوروبان. جميع الحقوق محفوظة.">© 2025 ZED Soroban. All rights reserved.</small>
-    </div>
+  <!-- ===== Footer ===== -->
+  <footer class="glass">
+    <p data-en="© 2025 ZED Soroban. All rights reserved." data-ar="© 2025 زد سوروبان. جميع الحقوق محفوظة.">
+      © 2025 ZED Soroban. All rights reserved.
+    </p>
   </footer>
 
   <script>
-    // ------------------ LANGUAGE TOGGLE (EN / AR with direction) ------------------
-    let isAR = false;
-    const langBtn = document.getElementById('langBtn');
-    const switchLang = () => {
-      isAR = !isAR;
-      document.body.classList.toggle('ar', isAR);
-      langBtn.textContent = isAR ? 'EN' : 'AR';
-      document.querySelectorAll('[data-en]').forEach(el => {
-        const en = el.getAttribute('data-en');
-        const ar = el.getAttribute('data-ar');
-        el.textContent = isAR ? (ar || en) : en;
-      });
-      // flip nav order a bit for RTL aesthetics if needed
-    };
-    langBtn.addEventListener('click', switchLang);
-
-    // ------------------ SCROLL REVEAL ------------------
-    const io = new IntersectionObserver(entries => {
-      for (const e of entries){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // ------------------ iOS-like springy hover for cards (pointer move parallax) ------------------
-    const tiltables = document.querySelectorAll('.card, .glass-panel, .glass-btn');
-    tiltables.forEach(el => {
-      el.addEventListener('pointermove', (ev) => {
-        const r = el.getBoundingClientRect();
-        const x = ev.clientX - r.left; const y = ev.clientY - r.top;
-        const rx = ((y / r.height) - .5) * -6; // tilt
-        const ry = ((x / r.width) - .5) * 6;
-        el.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
-        el.style.boxShadow = '0 30px 60px rgba(30,40,90,.45)';
-      });
-      el.addEventListener('pointerleave', () => {
-        el.style.transform = '';
-        el.style.boxShadow = '';
+    // ===== Language Switcher =====
+    const langBtn = document.getElementById("langBtn");
+    langBtn.addEventListener("click", () => {
+      document.body.classList.toggle("ar");
+      const isAr = document.body.classList.contains("ar");
+      langBtn.textContent = isAr ? "EN" : "AR";
+      document.querySelectorAll("[data-en]").forEach(el => {
+        el.textContent = isAr ? el.dataset.ar : el.dataset.en;
       });
     });
 
-    // Helper to detect current UI text (used in form alert)
-    function getText(mode){ return isAR ? 'AR' : 'EN'; }
+    // ===== Scroll Reveal =====
+    const revealElements = document.querySelectorAll(".reveal, footer, .services .card");
+    function handleScroll() {
+      const trigger = window.innerHeight * 0.85;
+      revealElements.forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < trigger) {
+          setTimeout(() => el.classList.add("visible"), i * 150);
+        }
+      });
+    }
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("load", handleScroll);
   </script>
 </body>
 </html>
