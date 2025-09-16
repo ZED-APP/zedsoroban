@@ -1,182 +1,506 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZED Soroban</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
-      color: white;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    nav a {
-      margin: 2 2rem;
-      padding:2 2rem;
-      text-decoration: none;
-      color: #e2e8f0;
-      transition: color .3s ease;
-    }
-    nav a:hover { color: #fff; }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ZED Soroban — Landing</title>
 
-    .glass {
-      backdrop-filter: blur(19px) saturate(180%);
-      -webkit-backdrop-filter: blur(19px) saturate(180%);
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      transition: transform .4s ease, box-shadow .4s ease;
-    }
-    .glass:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
-    }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
 
-    .hero {
-      max-width: 1000px;
-      margin: 2rem auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      padding: 0 1rem;
-      align-items: center;
-      animation: fadeInUp 1s ease both;
-    }
-    .hero img {
-      width: 100%;
-      border-radius: 16px;
-      animation: float 6s ease-in-out infinite;
-    }
+<style>
+  :root{
+    --bg-1: #0f172a;
+    --bg-2: #0b1220;
+    --glass: rgba(255,255,255,0.08);
+    --glass-2: rgba(255,255,255,0.06);
+    --accent: linear-gradient(90deg,#6EE7B7,#3B82F6 60%, #A78BFA);
+    --text: #e6eef8;
+    --muted: #a9b4c8;
+    --card: rgba(255,255,255,0.04);
+    --shadow: 0 10px 30px rgba(2,6,23,0.6);
+    --blur: 12px;
+    --glass-border: rgba(255,255,255,0.12);
+  }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      margin: 2rem auto;
-      max-width: 1000px;
-      padding: 0 1rem;
-    }
+  /* Light theme overrides */
+  :root[data-theme="light"]{
+    --bg-1: #f6f9ff;
+    --bg-2: #eef4ff;
+    --glass: rgba(255,255,255,0.6);
+    --glass-2: rgba(255,255,255,0.45);
+    --text: #0b1020;
+    --muted: #4b5563;
+    --card: rgba(255,255,255,0.65);
+    --shadow: 0 8px 24px rgba(9,12,24,0.06);
+    --glass-border: rgba(15,23,42,0.06);
+  }
 
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 2rem;
-      text-align: center;
-      background: rgba(15,23,42,0.7);
-      backdrop-filter: blur(10px);
-    }
-    .social a {
-      margin: 0 .5rem;
-      font-size: 1.2rem;
-      color: #cbd5e1;
-      transition: transform .3s ease, color .3s ease;
-    }
-    .social a:hover {
-      color: white;
-      transform: scale(1.2);
-    }
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.12), transparent 6%),
+                radial-gradient(1000px 400px at 90% 90%, rgba(59,130,246,0.08), transparent 6%),
+                linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow:hidden;
+  }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-  </style>
+  /* Animated floating shapes (liquid/aurora) */
+  .animated-bg {
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    filter:blur(40px) contrast(1.05) saturate(1.1);
+    opacity:0.95;
+    background:
+      radial-gradient(600px 300px at 15% 20%, rgba(167,139,250,0.12), transparent 12%),
+      radial-gradient(500px 400px at 85% 80%, rgba(59,130,246,0.10), transparent 12%),
+      radial-gradient(400px 250px at 50% 40%, rgba(110,231,183,0.06), transparent 12%);
+    animation: bgFloat 12s ease-in-out infinite alternate;
+  }
+  @keyframes bgFloat { from { transform: translateY(-6px) rotate(-0.5deg)} to { transform: translateY(6px) rotate(0.8deg)} }
+
+  /* Main layout */
+  .app {
+    height:100vh;
+    display:flex;
+    gap:18px;
+    align-items:stretch;
+    padding:28px;
+    box-sizing:border-box;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width:280px;
+    min-width:220px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:18px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    backdrop-filter: blur(var(--blur)) saturate(1.1);
+    border: 1px solid var(--glass-border);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    transform: translateZ(0);
+  }
+
+  .brand {
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo {
+    width:56px;height:56px;border-radius:12px;
+    background: linear-gradient(135deg,#fff 0%, rgba(255,255,255,0.08) 40%), var(--accent);
+    box-shadow: 0 8px 22px rgba(59,130,246,0.12), inset 0 -6px 18px rgba(0,0,0,0.15);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;
+  }
+  .brand h1{margin:0;font-size:16px;letter-spacing:0.2px}
+  .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+  .nav {
+    display:flex;flex-direction:column;gap:6px;margin-top:8px;
+  }
+  .nav a {
+    display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;text-decoration:none;color:var(--text);
+    transition:all .28s cubic-bezier(.2,.9,.25,1);
+    font-weight:600;font-size:14px;
+  }
+  .nav a:hover{ transform:translateX(6px); background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent) }
+  .nav a .dot { width:10px;height:10px;border-radius:999px;background:linear-gradient(90deg,#fff, rgba(255,255,255,0.2));box-shadow:0 6px 18px rgba(59,130,246,0.18) }
+
+  .sidebar .controls { margin-top:auto; display:flex;gap:8px;flex-direction:column }
+  .btn {
+    display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--glass-border);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    cursor:pointer;font-weight:700;font-size:13px;color:var(--text);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Main area */
+  .main {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    overflow:auto;
+    padding:6px;
+  }
+
+  .topbar {
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px;
+  }
+  .search {
+    display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+  }
+  .search input{background:transparent;border:0;outline:0;color:var(--text);width:280px;font-weight:600}
+
+  /* Cards area */
+  .cards {
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+    gap:18px;
+    align-items:stretch;
+  }
+
+  .card {
+    position:relative;
+    min-height:220px;
+    border-radius:16px;
+    overflow:hidden;
+    padding:16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border:1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(var(--blur)) saturate(1.05);
+    transition: transform .4s cubic-bezier(.2,.9,.25,1), box-shadow .3s;
+  }
+  .card:hover{ transform: translateY(-8px) scale(1.01); box-shadow: 0 22px 50px rgba(2,6,23,0.6) }
+
+  /* Liquid glass photo frame */
+  .card .photo {
+    height:110px;border-radius:12px;overflow:hidden;margin-bottom:12px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.05);
+    position:relative;
+  }
+  .card img {
+    width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);
+    transition: transform .9s cubic-bezier(.2,.9,.25,1);
+  }
+  .card:hover img { transform:scale(1.12) }
+
+  .card h3 { margin:6px 0 6px 0; font-size:16px; font-weight:800 }
+  .card p { margin:0;color:var(--muted); font-size:13px; line-height:1.4 }
+
+  .cta {
+    margin-top:12px; display:flex;gap:8px;align-items:center;
+  }
+  .download {
+    display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;font-weight:700;border:1px solid var(--glass-border);
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+    cursor:pointer;
+  }
+
+  /* Animated icons */
+  .pulse { animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0%{ transform:scale(1) } 50%{ transform:scale(1.06)} 100%{ transform:scale(1)} }
+
+  /* Floating action area */
+  .hero {
+    display:flex;gap:18px;align-items:center;justify-content:space-between;
+    padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--glass-border);backdrop-filter: blur(var(--blur));
+  }
+  .hero h2 { margin:0;font-size:20px }
+  .hero p { margin:6px 0 0 0;color:var(--muted) }
+
+  /* small responsive */
+  @media (max-width:900px){
+    .sidebar{display:none}
+    .app{padding:14px}
+    .search input{width:140px}
+  }
+
+  /* RTL / Arabic rules */
+  [dir="rtl"]{
+    direction:rtl;
+  }
+  .arabic { font-family: "Noto Naskh Arabic", "Inter", serif; font-weight:600 }
+  /* If you have Omar webfont, insert an @font-face and replace the arabic font-family above */
+  /*
+  @font-face{
+    font-family: 'OmarCustom';
+    src: url('path/to/omar.woff2') format('woff2');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display:swap;
+  }
+  .arabic { font-family: 'OmarCustom', "Noto Naskh Arabic", serif; }
+  */
+
+  /* simple navbar anchors */
+  .topnav { display:flex; gap:12px; align-items:center; }
+  .topnav a { color:var(--text); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:700 }
+  .topnav a:hover { background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent); transform: translateY(-3px); }
+
+  /* small visual tweaks */
+  footer { text-align:center;color:var(--muted); font-size:13px; padding:18px }
+</style>
 </head>
 <body>
-  <header class="glass">
-    <div style="display:flex;align-items:center;gap:.5rem;">
-      <div style="width:40px;height:40px;background:linear-gradient(to bottom right,#818cf8,#f472b6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#0f172a;">Z</div>
-      <h2>ZED Soroban</h2>
+
+<div class="animated-bg" aria-hidden="true"></div>
+
+<div class="app" id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" role="complementary">
+    <div class="brand">
+      <div class="logo">ZS</div>
+      <div>
+        <h1 id="brandTitle">ZED Soroban</h1>
+        <p id="brandTag">Learn abacus — mental math for kids</p>
+      </div>
     </div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#download">Download</a>
-      <a href="#contact">Contact</a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#home" class="nav-link"><span class="dot"></span> <span class="nav-label">Home</span></a>
+      <a href="#description" class="nav-link"><span class="dot"></span> <span class="nav-label">Description</span></a>
+      <a href="#services" class="nav-link"><span class="dot"></span> <span class="nav-label">Services</span></a>
+      <a href="#download" class="nav-link"><span class="dot"></span> <span class="nav-label">Download</span></a>
     </nav>
-  </header>
 
-  <section id="home" class="hero">
-    <div>
-      <h2 style="font-size:2rem;font-weight:bold;">Learn Soroban — Build Mental Math Superpowers</h2>
-      <p>ZED Soroban is an interactive application designed for children to master abacus techniques with playful lessons, engaging games, progressive levels, and analytics for parents and teachers.</p>
-      <p>
-        <a href="#" class="glass" style="padding:.6rem 1rem;display:inline-block;margin-top:1rem;">Download for Windows</a>
-        <a href="#" class="glass" style="padding:.6rem 1rem;display:inline-block;margin-left:.5rem;margin-top:1rem;background:rgba(79,70,229,0.9);">Android</a>
+    <div class="controls">
+      <button class="btn" id="themeToggle" title="Toggle theme">🌙 Dark</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="langEn">EN</button>
+        <button class="btn" id="langAr">ع</button>
+      </div>
+      <a class="btn" href="#download" style="justify-content:center">Download App</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" role="main">
+    <div class="topbar">
+      <div class="topnav" role="navigation" aria-label="Topbar">
+        <a href="#home">Home</a>
+        <a href="#description">Description</a>
+        <a href="#services">Services</a>
+        <a href="#download">Download</a>
+      </div>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="search" role="search" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input placeholder="Search lessons..." id="searchInput" />
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div>
+        <h2 id="heroTitle">ZED Soroban — Master the Soroban</h2>
+        <p id="heroDesc">Interactive soroban lessons for kids, smart exercises, progress tracking and more. Beautiful UI with glass effect and smooth animations.</p>
+        <div style="margin-top:12px;display:flex;gap:10px">
+          <a class="download" href="#" id="dlWindows">⬇ Windows</a>
+          <a class="download" href="#" id="dlAndroid">⬇ Android</a>
+        </div>
+      </div>
+      <div style="min-width:360px; max-width:460px;">
+        <div style="height:160px;border-radius:14px;border:1px solid var(--glass-border);padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(10px)">
+          <canvas id="demoCanvas" style="width:100%;height:100%;display:block;border-radius:10px"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section id="services">
+      <h3 style="margin:6px 0 12px 0">Our Services</h3>
+      <div class="cards">
+        <article class="card" role="article" aria-labelledby="c1">
+          <div class="photo">
+            <img alt="children learning abacus" src="https://images.unsplash.com/photo-1596496053658-3b7d1b2d1b8b?auto=format&fit=crop&w=1200&q=60">
+          </div>
+          <h3 id="c1">Interactive Lessons</h3>
+          <p>Guided soroban lessons with step-by-step animations designed for rapid learning and retention.</p>
+          <div class="cta">
+            <div class="download">Start</div>
+            <div style="margin-left:auto;color:var(--muted)">Beginner → Advanced</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo">
+            <img alt="progress tracking" src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1200&q=60">
+          </div>
+          <h3>Progress Tracking</h3>
+          <p>Realtime dashboards for parents and teachers to monitor improvement and time spent on practice.</p>
+        </article>
+
+        <article class="card">
+          <div class="photo">
+            <img alt="quiz and games" src="https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?auto=format&fit=crop&w=1200&q=60">
+          </div>
+          <h3>Quizzes & Games</h3>
+          <p>Math games that make practice fun — rewards, levels, and friendly competitions.</p>
+        </article>
+
+        <article class="card">
+          <div class="photo">
+            <img alt="download" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60">
+          </div>
+          <h3>Offline Mode</h3>
+          <p>Download lessons to keep practicing without internet. Small bundles for each grade.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- DESCRIPTION -->
+    <section id="description" style="margin-top:18px;">
+      <h3 style="margin:6px 0 10px 0">What is ZED Soroban?</h3>
+      <p id="aboutText" style="color:var(--muted);max-width:900px">
+        ZED Soroban is a modern, friendly soroban learning platform. We combine traditional abacus techniques with gamified lessons and a motivating reward system. Designed for children aged 5-14 and teachers who want a smarter classroom experience.
       </p>
-    </div>
-    <img src="https://images.unsplash.com/photo-1582719478179-3c7f4c7a0a8c?auto=format&fit=crop&w=800&q=60" alt="soroban">
-  </section>
+    </section>
 
-  <section class="cards">
-    <div class="glass" style="padding:1rem;">
-      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=60" alt="children" style="width:100%;height:150px;object-fit:cover;border-radius:12px;">
-      <h3>Fun Lessons</h3>
-      <p>Step-by-step lessons, colorful animations and rewards that keep kids motivated.</p>
-    </div>
-    <div class="glass" style="padding:1rem;">
-      <img src="https://images.unsplash.com/photo-1582719478179-3c7f4c7a0a8c?auto=format&fit=crop&w=800&q=60" alt="abacus" style="width:100%;height:150px;object-fit:cover;border-radius:12px;">
-      <h3>Interactive Abacus</h3>
-      <p>Realistic soroban simulation with tactile feedback and adaptive speed.</p>
-    </div>
-    <div class="glass" style="padding:1rem;">
-      <img src="https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=800&q=60" alt="progress" style="width:100%;height:150px;object-fit:cover;border-radius:12px;">
-      <h3>Progress Tracking</h3>
-      <p>Reports for parents and shaped practice plans for each child.</p>
-    </div>
-  </section>
+    <footer id="download" style="margin-top:18px">
+      <strong>Download</strong> — Windows (x64) • Android (APK) • Soon on iOS
+    </footer>
+  </main>
+</div>
 
-  <section id="services" style="max-width:1000px;margin:2rem auto;padding:0 1rem;">
-    <h2 style="font-size:1.8rem;font-weight:bold;">Our Services</h2>
-    <div class="cards">
-      <div class="glass" style="padding:1rem;">
-        <h4>Classroom License</h4>
-        <p>Teacher dashboard, student accounts, assignments and reports.</p>
-      </div>
-      <div class="glass" style="padding:1rem;">
-        <h4>Individual License</h4>
-        <p>Single-user app with progress sync and achievements.</p>
-      </div>
-      <div class="glass" style="padding:1rem;">
-        <h4>Custom Training</h4>
-        <p>Bespoke lesson plans for schools and after-school programs.</p>
-      </div>
-    </div>
-  </section>
+<script>
+/* ---------------------------
+   App: light/dark + language
+   --------------------------- */
 
-  <footer id="contact" class="glass">
-    <p>Follow us:</p>
-    <div class="social">
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
-      <a href="#"><i class="fab fa-whatsapp"></i></a>
-      <a href="#"><i class="fab fa-telegram"></i></a>
-    </div>
-    <p style="margin-top:1rem;font-size:.9rem;color:#94a3b8;">© 2025 ZED Soroban — All rights reserved.</p>
-  </footer>
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const langEn = document.getElementById('langEn');
+const langAr = document.getElementById('langAr');
+
+// restore preferences (simple)
+const savedTheme = localStorage.getItem('zed_theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('zed_theme', next);
+  themeToggle.textContent = next === 'dark' ? '🌙 Dark' : '☀️ Light';
+});
+
+/* Language switch:
+   - EN: LTR, Inter
+   - AR: RTL, Arabic font (Noto Naskh)
+*/
+function setLang(lang) {
+  if (lang === 'ar') {
+    document.documentElement.setAttribute('dir','rtl');
+    document.body.classList.add('arabic');
+    // translate some texts (simple inline translations)
+    document.getElementById('brandTitle').textContent = 'زاد سوروبان';
+    document.getElementById('brandTag').textContent = 'تعلم السوروبان — الحساب الذهني للأطفال';
+    document.getElementById('heroTitle').textContent = 'زاد سوروبان — اتقن السوروبان';
+    document.getElementById('heroDesc').textContent = 'دروس تفاعلية للسوروبان، تمارين ذكية وتتبّع التقدّم. واجهة جميلة وتأثير زجاجي ناعم.';
+    document.getElementById('aboutText').textContent = 'زاد سوروبان هو منصة تعليمية حديثة للسوروبان. ندمج التقنية التقليدية مع تمارين ممتعة ونظام مكافآت يحفز الأطفال.';
+  } else {
+    document.documentElement.setAttribute('dir','ltr');
+    document.body.classList.remove('arabic');
+    document.getElementById('brandTitle').textContent = 'ZED Soroban';
+    document.getElementById('brandTag').textContent = 'Learn abacus — mental math for kids';
+    document.getElementById('heroTitle').textContent = 'ZED Soroban — Master the Soroban';
+    document.getElementById('heroDesc').textContent = 'Interactive soroban lessons for kids, smart exercises, progress tracking and more. Beautiful UI with glass effect and smooth animations.';
+    document.getElementById('aboutText').textContent = 'ZED Soroban is a modern, friendly soroban learning platform. We combine traditional abacus techniques with gamified lessons and a motivating reward system. Designed for children aged 5-14 and teachers who want a smarter classroom experience.';
+  }
+  localStorage.setItem('zed_lang', lang);
+}
+
+langEn.addEventListener('click', ()=>setLang('en'));
+langAr.addEventListener('click', ()=>setLang('ar'));
+
+// apply saved
+const savedLang = localStorage.getItem('zed_lang') || 'en';
+setLang(savedLang);
+
+/* ---------------------------
+    Canvas demo: subtle liquid motion
+   --------------------------- */
+const canvas = document.getElementById('demoCanvas');
+const ctx = canvas.getContext('2d');
+function fitCanvas(){
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * devicePixelRatio;
+  canvas.height = rect.height * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+}
+fitCanvas();
+window.addEventListener('resize', ()=>{ fitCanvas(); draw(); });
+
+let t=0;
+function draw(){
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  ctx.clearRect(0,0,w,h);
+
+  // soft gradient background inside card
+  const g = ctx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0, 'rgba(167,139,250,0.16)');
+  g.addColorStop(0.5, 'rgba(59,130,246,0.12)');
+  g.addColorStop(1, 'rgba(110,231,183,0.06)');
+  ctx.fillStyle = g;
+  roundRect(ctx,0,0,w,h,10);
+  ctx.fill();
+
+  // animated circles (liquid blobs)
+  for(let i=0;i<4;i++){
+    const cx = (0.2 + i*0.18 + 0.02*Math.sin(t*0.6+i))*w;
+    const cy = (0.3 + 0.12*i + 0.06*Math.cos(t*0.4+i))*h;
+    const r = 28 + 8*Math.sin(t*0.7 + i);
+    drawBlob(ctx, cx, cy, r, i*0.8);
+  }
+  t += 0.02;
+  requestAnimationFrame(draw);
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+
+function drawBlob(ctx,x,y,r,seed){
+  ctx.save();
+  const grd = ctx.createRadialGradient(x,y,r*0.2,x,y,r);
+  grd.addColorStop(0, 'rgba(255,255,255,0.6)');
+  grd.addColorStop(1, 'rgba(255,255,255,0.06)');
+  ctx.fillStyle = grd;
+  ctx.globalCompositeOperation = 'soft-light';
+  ctx.beginPath();
+  for(let a=0;a<Math.PI*2;a+=0.2){
+    const rr = r + 6*Math.sin(a*2.3 + t*1.2 + seed) + 4*Math.cos(a*1.7 + seed*1.5);
+    const px = x + Math.cos(a)*rr;
+    const py = y + Math.sin(a)*rr;
+    if(a===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+draw();
+
+/* ---------------------------
+   Example download links (placeholders)
+   --------------------------- */
+document.getElementById('dlWindows').href = '#'; // replace with real link
+document.getElementById('dlAndroid').href = '#'; // replace with real link
+
+/* Accessibility: smooth keyboard nav for anchors */
+document.querySelectorAll('.nav-link').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    // smooth scroll
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+});
+</script>
+
 </body>
 </html>
-
-
