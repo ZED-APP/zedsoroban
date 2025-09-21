@@ -199,6 +199,26 @@ body[dir="rtl"] {
     .card h3 {
       margin: 10px 0;
     }
+    .title h2{
+       background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: popIn 1s ease;
+    }
+        .subtitle h5{
+       background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: popIn 1s ease;
+    }
     @keyframes popIn {
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
@@ -324,6 +344,7 @@ body[dir="rtl"] {
   </script>
 </body>
 </html>
+
 
 
 
