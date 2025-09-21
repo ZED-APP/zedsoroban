@@ -33,7 +33,15 @@ body[dir="rtl"] {
       background: linear-gradient(135deg, #FFFFFF, #FFFFFF, #f0f0f0);
       color: var(--dark-text);
     }
-
+.video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;  /* This makes sure the video covers the entire background */
+      z-index: -1; /* This ensures the video is behind all other content */
+    }
     /* Glassmorphism Background Animation */
     .background {
       position: fixed;
@@ -246,7 +254,10 @@ body[dir="rtl"] {
   <!-- Cards -->
   <section class="cards" id="description">
     <div class="card">
-      <iframe width="560" height="315" src="1.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     <video class="video-background" autoplay muted loop playsinline>
+    <source src="1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
       <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/zed-2026-copie-1.png?w=768&h=768">
       <h3 id="card1">What is Soroban?</h3>
       <p id="text1">A Japanese abacus that trains your mind and boosts mental calculation skills.</p>
@@ -307,6 +318,7 @@ body[dir="rtl"] {
   </script>
 </body>
 </html>
+
 
 
 
