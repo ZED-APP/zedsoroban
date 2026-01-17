@@ -1,136 +1,542 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>ZED Soroban</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" as="style">
+  <meta charset="UTF-8">
+  <title>ZED Soroban</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+ 
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --bg-dark: linear-gradient(135deg,#020024,#090979,#00d4ff);
   --glass: rgba(255,255,255,.14);
   --border: rgba(255,255,255,.25);
-  --blur: blur(18px);
+  --blur: blur(22px);
   --radius: 22px;
   --text-light:#fff;
   --text-dark:#111;
   --accent:#7cf7ff;
 }
-*{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;font-family:'Tajawal',sans-serif;background:radial-gradient(circle at top,#0ff3,transparent),linear-gradient(180deg,#0b1026,#020617);color:var(--text-light);overflow-x:hidden}
-body.light{background:#f5f7fb;color:var(--text-dark)}
-a{color:inherit;text-decoration:none}
-.background{position:fixed;inset:0;z-index:-1}
-.circle{position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(70px);opacity:.2;animation:float 25s infinite linear}
+
+/* ===== GLOBAL ===== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:'Tajawal',sans-serif;
+  background:radial-gradient(circle at top,#0ff3,transparent),
+             linear-gradient(180deg,#0b1026,#020617);
+  color:var(--text-light);
+  overflow-x:hidden;
+}
+
+body.light{
+  background:#f5f7fb;
+  color:var(--text-dark);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* ===== BACKGROUND BLOBS ===== */
+.background{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+.circle{
+  position:absolute;
+  width:300px;height:300px;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.35;
+  animation:float 25s infinite linear;
+}
 .circle:nth-child(1){background:#00ffd5;top:-80px;left:-80px}
 .circle:nth-child(2){background:#ff7eb3;bottom:-100px;right:-100px}
 .circle:nth-child(3){background:#facc15;top:40%;left:60%}
-@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-60px)}100%{transform:translateY(0)}}
-nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 36px;backdrop-filter:var(--blur);background:var(--glass);border-bottom:1px solid var(--border)}
-nav .logo{font-size:1.6rem;font-weight:700;letter-spacing:.5px}
-nav ul{list-style:none;display:flex;gap:18px;padding:0;margin:0}
-nav ul a{padding:8px 14px;border-radius:14px;transition:.3s}
-nav ul a:hover{background:rgba(255,255,255,.18);color:var(--accent)}
-.switches button{background:var(--glass);border:1px solid var(--border);border-radius:14px;padding:8px 14px;cursor:pointer;backdrop-filter:var(--blur);transition:.3s}
-.switches button:hover{transform:scale(1.07)}
-.hero{padding:120px 20px 70px;text-align:center}
-.hero h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:16px}
-.hero p{max-width:780px;margin:auto;opacity:.9;font-size:1.15rem}
-.video-background{position:fixed;inset:0;object-fit:cover;z-index:-2;opacity:.25}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;padding:30px}
-.card{background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);backdrop-filter:var(--blur);padding:26px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35);transition:.45s cubic-bezier(.2,.8,.2,1);animation:fadeUp .9s ease both}
-.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 40px 120px rgba(0,255,255,.25)}
-.card img{max-width:100%;border-radius:16px;margin-bottom:16px;display:block;loading:lazy}
-.card h3{margin:10px 0;font-size:1.3rem}
-.card p{opacity:.9}
-.card a{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:16px;background:linear-gradient(135deg,#00f2fe,#4facfe);color:#000;font-weight:600;transition:.35s}
-.card a:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(0,255,255,.6)}
-footer{text-align:center;padding:30px;margin-top:60px;backdrop-filter:var(--blur);background:var(--glass);border-top:1px solid var(--border)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-@media(max-width:768px){nav ul{display:none}}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-60px)}
+  100%{transform:translateY(0)}
+}
+
+/* ===== NAVBAR ===== */
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 36px;
+  backdrop-filter:var(--blur);
+  background:var(--glass);
+  border-bottom:1px solid var(--border);
+}
+
+nav .logo{
+  font-size:1.6rem;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  padding:0;
+  margin:0;
+}
+
+nav ul a{
+  padding:8px 14px;
+  border-radius:14px;
+  transition:.3s;
+}
+
+nav ul a:hover{
+  background:rgba(255,255,255,.18);
+  color:var(--accent);
+}
+
+.switches button{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:8px 14px;
+  cursor:pointer;
+  backdrop-filter:var(--blur);
+  transition:.3s;
+}
+.switches button:hover{
+  transform:scale(1.07);
+}
+
+/* ===== HERO ===== */
+.hero{
+  padding:120px 20px 70px;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:clamp(2rem,4vw,3rem);
+  margin-bottom:16px;
+}
+.hero p{
+  max-width:780px;
+  margin:auto;
+  opacity:.9;
+  font-size:1.15rem;
+}
+
+/* ===== VIDEO ===== */
+.video-background{
+  position:fixed;
+  inset:0;
+  object-fit:cover;
+  z-index:-2;
+  opacity:.25;
+}
+
+/* ===== CARDS GRID ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:26px;
+  padding:30px;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  backdrop-filter:var(--blur);
+  padding:26px;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
+  transition:.45s cubic-bezier(.2,.8,.2,1);
+  animation:fadeUp .9s ease both;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 40px 120px rgba(0,255,255,.25);
+}
+
+.card img{
+  max-width:100%;
+  border-radius:16px;
+  margin-bottom:16px;
+}
+
+.card h3{
+  margin:10px 0;
+  font-size:1.3rem;
+}
+
+.card p{
+  opacity:.9;
+}
+
+/* ===== BUTTON LINKS ===== */
+.card a{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#00f2fe,#4facfe);
+  color:#000;
+  font-weight:600;
+  transition:.35s;
+}
+.card a:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 30px rgba(0,255,255,.6);
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:30px;
+  margin-top:60px;
+  backdrop-filter:var(--blur);
+  background:var(--glass);
+  border-top:1px solid var(--border);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:none}
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  nav ul{display:none}
+}
 </style>
 </head>
 <body>
-<div class="background">
-  <div class="circle"></div>
-  <div class="circle"></div>
-</div>
 
-<nav>
-  <div class="logo">ZED Soroban</div>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#description">Description</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#download">Download</a></li>
-    <li><a href="#PDF">PDF</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#pub">pub</a></li>
-  </ul>
-  <div class="switches">
+  <!-- Background Animation -->
+  <div class="background">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">ZED Soroban</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#description">Description</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="#PDF">PDF</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#pub">pub</a></li>
+    </ul>
+    <div class="switches">
     <button onclick="toggleTheme()">🌙/☀️</button>
     <button onclick="toggleLang()">AR/EN</button>
-  </div>
-</nav>
+    </div>
+  </nav>
 
-<section class="hero" id="home">
-  <div class="card">
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="card">
     <h1 id="title">مرحبًا بك في زاد سوروبان</h1>
     <p id="subtitle">تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار</p>
-  </div>
-</section>
-
-<video class="video-background" autoplay muted loop playsinline poster="poster.jpg">
-  <source src="1-compressed.mp4" type="video/mp4">
-</video>
-
-<!-- Cards (examples with lazy loading images) -->
-<section class="cards" id="description">
-  <div class="card">
+    </div>
+  </section>
+    <video class="video-background" autoplay muted loop playsinline>
+    <source src="1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <!-- Cards -->
+  <section class="cards" id="description">
+    <div class="card">
     <h3 id="card1">ابدأ رحلتك الآن</h3>
-    <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/zed-2026-copie-1.png?w=768&h=768" loading="lazy">
+    <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/zed-2026-copie-1.png?w=768&h=768">
     <p id="text1">اكتشف فضاء زاد سوروبان وكن واحدا من هذه العائلة سواءا كنت مدربا أو متدربا على السوروبان</p>
-  </div>
-  <div class="card" id="services">
-    <h3 id="card2">خدماتنا</h3>
-    <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/3.png?w=768" loading="lazy">
-    <p id="text2">فلاش أنزان، نماذج تدريب ومسابقات للطباعة، تدريبات ومسابقات رقمية حضورية وأونلاين</p>
-  </div>
-</section>
+    </div>
+    <div class="card" id="services">
+     <h3 id="card2">خدماتنا</h3>
+     <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/3.png?w=768">
+      <p id="text2">فلاش أنزان، نماذج تدريب ومسابقات للطباعة، تدريبات ومسابقات رقمية حضورية وأونلاين</p>
+      </div>
+      <div class="card" id="download">
+      <h3 id="card3">احصل على التطبيق</h3>
+      <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/6.png?w=768" alt="Kids Learning"> 
+      <p id="text3">تحميل نسخة الويندوز للحاسوب</p>
+      <div style="height:20px;"></div>
+      <a href="https://download1322.mediafire.com/gvtpr5vxowlg83t40rksjzqf_4_svHq-lyubVUUqR6en1p6Y3jJQNEiB-r174MKnPV7AvslET9xRXy8wiBN1D_i7QvKK8VGg_9fIYtqNRAAuEKb8I3WPYgY47cW-WxSmxno8-wq124qneTnrcjmnazV4upR4Ib6CY28S788-74fb93U/xgwadp01mjnay5u/ZED+SETUP.msi" target="_blank">⬇️ Download (EXE) </a>
+      <p id="text5">أو جرب هذا</p>
+      <a href="https://download1531.mediafire.com/8nf8rokpgzdg4cqvk2qTX6wdFq7FhFSep3zXAFlVVgET23ZDGAicZ3G2VYkmZouvlJB16fEjKYcBTH71z0erVe7AqSz1anYkN05HpcBg79iYHAcYheX26KFtENKH9euvd8g6MxkjR2c6UUGyD05TEwJs15beZUDM1Otpae-amHOfpw4/y7c58ziw6hzx7ze/ZED+SETUP+n4.7.2+.rar" target="_blank">⬇️ Download (RAR) </a>
+      </div>
+    
+      <div class="card" >
+      <h3 id="card4">احصل على التطبيق</h3>
+      <img src="https://zedsoroban.wordpress.com/wp-content/uploads/2025/09/5.png?w=768">
+      <p id="text4">تحميل نسخة الأندرويد للهاتف</p>
+      <div style="height:20px;"></div>
+      <a href="https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh">⬇️ Download for Android</a>
+      </div>
+    
+  </section>
 
-<footer>
+  <section class="hero" id="PDF">
+      <div class="card">
+        <h1 id="titlegame">ساهمنا في إنجاح العديد من المسابقات والبطولات</h1>
+        <p id="subtitlegame"> من خلال توفير نماذج اختبارات كتابية بصيغة  PDF ذكية وسهلة الاستغلال من طرف المتسابقين وكذا من طرف المصححين، ومنها</p>
+    </div>
+  </section>
+  
+  <section class="cards" id="webapps">
+  <div class="card">
+      <h3>نماذج خاصة بمسابقة الونشريس العربية</h3>
+    <div></div>
+      <a href="wancha.pdf" target="_blank">🔗 Open</a>
+    </div>
+      <div class="card">
+      <h3>نماذج خاصة بمسابقة موجة البحر الدرارية</h3>
+        <div></div>
+      <a href="moja.pdf" target="_blank">🔗 Open</a>
+    </div>
+   <div class="card">
+      <h3>نماذج خاصة ببطولة التاج للسوروبان</h3>
+     <div></div>
+      <a href="taj.pdf" target="_blank">🔗 Open</a>
+    </div>
+    <div class="card">
+      <h3>نماذج تحدي الأذكياء</h3>
+      <div></div>
+      <a href="smart.pdf" target="_blank">🔗 Open</a>
+    </div>
+      <div class="card">
+      <h3>نماذج مسابقة موجة البحر سطاوالي</h3>
+        <div></div>
+      <a href="mojasta.pdf" target="_blank">🔗 Open</a>
+    </div>
+        <div class="card">
+      <h3>نماذج أخرى</h3>
+          <div></div>
+      <a href="namadij.pdf" target="_blank">🔗 Open</a>
+    </div>
+  </section>
+
+
+
+  
+  <section class="hero" id="games">
+      <div class="card">
+          <h1 id="titlegame">ألعاب ذكاء مقترحة</h1>
+    <p id="subtitlegame">إليك بعض ألعاب الذكاء التي قمنا بإضافتها، يمكنك استخدامها في تدريباتك وتنويع أنشطتك</p>
+      </div>
+  </section>
+
+  
+  <!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
+  <section class="cards" id="webapps">
+    <div class="card">
+      <h3>Guess the Number</h3>
+      <p>لعبة تخمين الرقم</p>
+      <a href="https://zed-app.github.io/Guess-the-Number/" target="_blank">🔗 Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Hectoc</h3>
+      <p>هيكتوك</p>
+      <a href="https://zed-app.github.io/hectoc/" target="_blank">🔗 Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Memory</h3>
+      <p>لعبة الذاكرة</p>
+      <a href="https://zed-app.github.io/memory/" target="_blank">🔗 Open</a>
+    </div>
+
+    <div class="card">
+      <h3>XOXO</h3>
+      <p>إكس أو إكس أو</p>
+      <a href="https://zed-app.github.io/xoxo/" target="_blank">🔗 Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Random Math Question</h3>
+      <p>سؤال حساب عشوائي</p>
+      <a href="https://zed-app.github.io/Random-math-question/" target="_blank">🔗 Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Sudoku</h3>
+      <p>سودوكو</p>
+      <a href="https://zed-app.github.io/sodoku/" target="_blank">🔗 Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Spelling Bee</h3>
+      <p>سبيلنغ بي</p>
+      <a href="https://zed-app.github.io/bee/" target="_blank">🔗 Open</a>
+    </div>
+  </section>
+  <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
+
+  <section class="hero" id="contact">
+      <div class="card">
+          <h1 id="titlecontact">تواصل معنا</h1>
+    <p id="subtitlecontact">يمكنك التواصل مع فريق الدعم عبر فيسبوك كما يمكنك الإنضمام إلى مجموعة زاد سوروبان على مسنجر، مجموعة تليغرام فيها شروحات متعددة</p>
+      </div>
+  </section>
+
+  
+<!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
+  <section class="cards" id="webapps">
+    <div class="card">
+         <img src="facebook.png" style="width:60px; height:60px; border-radius:50%;">
+      <h3>Facebook</h3>
+       <p>ZED App</p>
+      <a href="https://www.facebook.com/ZED.APP.05" target="_blank"> 🔗 ZED App</a>
+    </div>
+
+    <div class="card">
+         <img src="facebook.png" style="width:60px; height:60px; border-radius:50%;">
+      <h3>Facebook</h3>
+     <p>LEMMOU Mohammed</p>
+      <a href="https://www.facebook.com/mohamed.lemmou.7" target="_blank"> 🔗 LEMMOU Mohammed</a>
+    </div>
+
+    <div class="card">
+         <img src="messenger.png" style="width:60px; height:60px; border-radius:50%;">
+      <h3>Messenger</h3>
+      <p>ZED Soroban</p>
+      <a href="https://m.me/j/Abbe2tAnSTeaPqha/" target="_blank"> 🔗 ZED Soroban</a>
+    </div>
+
+    <div class="card">
+      <img src="telegram.png" style="width:60px; height:60px; border-radius:50%;">
+      <h3>Telegram</h3>
+      <p>معلومات على منصة زاد سوروبان</p>
+      <a href="https://t.me/+YPWQ_CnoLSZhNjFk" target="_blank"> 🔗 link </a>
+    </div>
+  </section>
+  <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
+
+  <!-- puuuuuub ************************************************************************************************** -->
+   <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
+
+  <section class="hero" id="pub">
+      <div class="card">
+          <h1 id="titlepub">مساحة مخصصة لإعلاناتكم</h1>
+    <p id="subtitlepub">خصصنا لكم هذه المساحة لاستقبال إعلاناتكم حتى يتسنى مشاركتها وانتشارها </p>
+      </div>
+  </section>
+
+  
+<!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
+  <section class="cards" id="webapps">
+    <div class="card">
+          <img src="pub1.jpeg" >
+      <h3>إعلان بطولة</h3>
+       <p>البطولة المحلية زاد </p>
+      <a href=" " target="_blank"> 🔗 رابطك الخاص ...</a>
+    </div>
+    
+    <div class="card">
+          <img src="pub1.jpeg" >
+      <h3>إعلان بطولة</h3>
+       <p>البطولة الجهوية زاد </p>
+      <a href=" " target="_blank"> 🔗 رابطك الخاص ...</a>
+    </div>
+    
+    <div class="card">
+         <img src="pub1.jpeg" >
+      <h3>إعلان بطولة</h3>
+       <p>البطولة الوطنية زاد </p>
+      <a href=" " target="_blank"> 🔗 رابطك الخاص ...</a>
+    </div>
+
+    <div class="card">
+         <img src="pub1.jpeg" >
+      <h3>إعلان بطولة</h3>
+       <p> البطولة العالمية زاد </p>
+      <a href=" " target="_blank"> 🔗 رابطك الخاص ...</a>
+    </div>
+              
+  </section>
+  <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
+  <!-- Footer -->
+  <footer>
+
+
   <p>© 2019-2026 ZED Soroban. All rights reserved.</p>
-</footer>
+  </footer>
 
-<script>
-let isArabic=true;
-const domCache={};
-['title','subtitle','card1','text1','card2','text2','card3','card4','text3','text4','text5','titlegame','subtitlegame','titlecontact','subtitlecontact','titlepub','subtitlepub'].forEach(id=>{
-  domCache[id]=document.getElementById(id)
-});
-function toggleTheme(){document.body.classList.toggle('light')}
-function toggleLang(){
-  isArabic=!isArabic;
-  if(isArabic){
-    document.body.dir="rtl";
-    domCache.title.innerText="مرحبًا بك في زاد سوروبان";
-    domCache.subtitle.innerText="تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار.";
-    domCache.card1.innerText="ابدأ رحلتك الآن";
-    domCache.text1.innerText="اكتشف فضاء زاد سوروبان وكن واحدا من هذه العائلة سواءا كنت مدربا أو متدربا على السوروبان";
-    domCache.card2.innerText="خدماتنا";
-    domCache.text2.innerText="فلاش أنزان، نماذج تدريب ومسابقات للطباعة، تدريبات ومسابقات رقمية حضورية وأونلاين";
-  } else {
-    document.body.dir="ltr";
-    domCache.title.innerText="Welcome to ZED Soroban";
-    domCache.subtitle.innerText="Learn Japanese-style mental arithmetic using the soroban. A fun and educational interactive platform for children and adults.";
-    domCache.card1.innerText="Start your journey now";
-    domCache.text1.innerText="Discover the ZED Soroban space and become one of this family, whether you are a Soroban trainer or trainee.";
-    domCache.card2.innerText="Our Services";
-    domCache.text2.innerText="Flash Anzan, printable training and competition templates, in-person and online digital training and competitions";
-  }
-}
-</script>
+  <script>
+    let isArabic = true;
+    function toggleTheme() {
+    document.body.classList.toggle('light');
+    }
+
+    function toggleLang() {
+      isArabic = !isArabic;
+      if (isArabic) {
+        document.body.dir = "rtl";
+        document.getElementById("title").innerText = "مرحبًا بك في زاد سوروبان";
+        document.getElementById("subtitle").innerText = "تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار.";
+        document.getElementById("card1").innerText = "ابدأ رحلتك الآن";
+        document.getElementById("text1").innerText = "اكتشف فضاء زاد سوروبان وكن واحدا من هذه العائلة سواءا كنت مدربا أو متدربا على السوروبان";
+        document.getElementById("card2").innerText = "خدماتنا";
+        document.getElementById("text2").innerText = "فلاش أنزان، نماذج تدريب ومسابقات للطباعة، تدريبات ومسابقات رقمية حضورية وأونلاين";
+        document.getElementById("card3").innerText = "احصل على التطبيق";
+        document.getElementById("card4").innerText = "احصل على التطبيق";
+        document.getElementById("text3").innerText = "تحميل نسخة الويندوز للحاسوب";
+            document.getElementById("text5").innerText = "أو جرب هذا";
+        document.getElementById("text4").innerText = "تحميل نسخة الأندرويد للهاتف!";
+        
+        document.getElementById("titlegame").innerText = "ألعاب ذكاء مقترحة"; 
+        document.getElementById("subtitlegame").innerText = "إليك بعض ألعاب الذكاء التي قمنا بإضافتها، يمكنك استخدامها في تدريباتك وتنويع أنشطتك"; 
+       
+        document.getElementById("titlecontact").innerText = "تواصل معنا!";
+        document.getElementById("subtitlecontact").innerText = " يمكنك التواصل مع فريق الدعم عبر فيسبوك كما يمكنك الإنضمام إلى مجموعة زاد سوروبان على مسنجر، مجموعة تليغرام فيها شروحات متعددة"; 
+
+         document.getElementById("titlepub").innerText = "مساحة مخصصة لإعلاناتكم";
+        document.getElementById("subtitlepub").innerText = "خصصنا لكم هذه المساحة لاستقبال إعلاناتكم حتى يتسنى مشاركتها وانتشارها"; 
+
+        
+      } else {
+        document.body.dir = "ltr";
+        document.getElementById("title").innerText = "Welcome to ZED Soroban";
+        document.getElementById("subtitle").innerText = "Learn Japanese-style mental arithmetic using the soroban. A fun and educational interactive platform for children and adults.";
+        document.getElementById("card1").innerText = "Start your journey now";
+        document.getElementById("text1").innerText = "Discover the ZED Soroban space and become one of this family, whether you are a Soroban trainer or trainee.";
+        document.getElementById("card2").innerText = "Our Services";
+        document.getElementById("text2").innerText = "Flash Anzan, printable training and competition templates, in-person and online digital training and competitions";
+        document.getElementById("card3").innerText = "Get the App";
+        document.getElementById("text3").innerText = "Available for Windows and Android";
+        document.getElementById("text5").innerText = "Or try this";
+        document.getElementById("titlegame").innerText = "Suggested brain games"; 
+        document.getElementById("subtitlegame").innerText = "Here are some brain games we've added; you can use them in your training and to diversify your activities."; 
+       
+        document.getElementById("titlecontact").innerText = "Contact us!";
+        document.getElementById("subtitlecontact").innerText = "You can contact the support team via Facebook, and you can also join the Zad Soroban group on Messenger, a Telegram group with multiple explanations"; 
+      
+        document.getElementById("titlepub").innerText = "A space dedicated to your advertisements";
+        document.getElementById("subtitlepub").innerText = "We have dedicated this space for you to submit your advertisements so that they can be customized and distributed"; 
+      }
+    }
+  </script>
 </body>
 </html>
+
