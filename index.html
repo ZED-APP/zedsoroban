@@ -244,11 +244,26 @@ body[dir="rtl"] {
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-      }
-    }
+  @media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+  }
+
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  nav ul li a {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -567,6 +582,7 @@ body[dir="rtl"] {
   </script>
 </body>
 </html>
+
 
 
 
