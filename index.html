@@ -24,7 +24,7 @@ body{
   margin:0;
   font-family:'Tajawal',sans-serif;
   background:radial-gradient(circle at top,#0ff3,transparent),
-             linear-gradient(180deg,#0b1026,#020617);
+  linear-gradient(180deg,#0b1026,#020617);
   color:var(--text-light);
   overflow-x:hidden;
 }
@@ -191,6 +191,69 @@ footer{
   background:var(--glass);
   border-top:1px solid var(--border);
 }
+
+
+  body {
+  font-family: 'Cairo', sans-serif;
+  background: #f5f7fb;
+}
+
+.table-container {
+  width: 90%;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.table-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.modern-table thead {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+}
+
+.modern-table th, 
+.modern-table td {
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.modern-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: 0.3s;
+}
+
+.modern-table tbody tr:hover {
+  background: #f1f7ff;
+  transform: scale(1.01);
+}
+
+.modern-table a {
+  text-decoration: none;
+  color: white;
+  background: #4facfe;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.modern-table a:hover {
+  background: #00c6ff;
+}
+  
 /* ===== ANIMATIONS ===== */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(40px)}
@@ -199,6 +262,10 @@ footer{
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   nav ul{display:none}
+    .modern-table th, .modern-table td {
+    padding: 10px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -278,58 +345,61 @@ footer{
         <p id="subtitlegame"> من خلال توفير نماذج اختبارات كتابية بصيغة  PDF ذكية وسهلة الاستغلال من طرف المتسابقين وكذا من طرف المصححين، ومنها</p>
     </div>
   </section>
-  <section class="cards" id="webapps">
-  <div class="card">
-      <h3>نماذج خاصة بمسابقة الونشريس العربية</h3>
-      <h5>06/07/2025</h5>
-    <div></div>
-      <a href="wancha.pdf" target="_blank">🔗 Open</a>
-    </div>
-      <div class="card">
-      <h3>نماذج خاصة بمسابقة موجة البحر الدرارية</h3>
-      <h5>01/05/2025</h5>
-      <div></div>
-      <a href="moja.pdf" target="_blank">🔗 Open</a>
-    </div>
-   <div class="card">
-      <h3>نماذج خاصة ببطولة التاج للسوروبان</h3>
-      <h5>03/05/2025</h5>
-     <div></div>
-      <a href="taj.pdf" target="_blank">🔗 Open</a>
-    </div>
-    <div class="card">
-      <h3>نماذج تحدي الأذكياء</h3>
-      <div></div>
-      <a href="smart.pdf" target="_blank">🔗 Open</a>
-    </div>
-    <div class="card">
-      <h3>نماذج مسابقة موجة البحر سطاوالي</h3>
-      <h5>26/07/2025</h5>
-      <div></div>
-      <a href="mojasta.pdf" target="_blank">🔗 Open</a>
-    </div>
+ <section class="table-container" id="webapps">
+  <h2>📄 النماذج</h2>
 
-    <div class="card">
-      <h3>نماذج مسابقة الطارف</h3>
-      <h5>01/11/2025</h5>
-      <div></div>
-      <a href="mostarf.pdf" target="_blank">🔗 Open</a>
-    </div>
-
-    <div class="card">
-      <h3>نماذج المسابقة العربية</h3>
-      <h5>28/12/2025</h5>
-      <div></div>
-      <a href="mosarab.pdf" target="_blank">🔗 Open</a>
-    </div>
-    
-    <div class="card">
-      <h3>نماذج أخرى</h3>
-      <div></div>
-      <a href="namadij.pdf" target="_blank">🔗 Open</a>
-    </div>
-  </section>
-  
+  <table class="modern-table">
+    <thead>
+      <tr>
+        <th>📌 العنوان</th>
+        <th>📅 التاريخ</th>
+        <th>🔗 الرابط</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>نماذج خاصة بمسابقة الونشريس العربية</td>
+        <td>06/07/2025</td>
+        <td><a href="wancha.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج خاصة بمسابقة موجة البحر الدرارية</td>
+        <td>01/05/2025</td>
+        <td><a href="moja.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج خاصة ببطولة التاج للسوروبان</td>
+        <td>03/05/2025</td>
+        <td><a href="taj.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج تحدي الأذكياء</td>
+        <td>-</td>
+        <td><a href="smart.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج مسابقة موجة البحر سطاوالي</td>
+        <td>26/07/2025</td>
+        <td><a href="mojasta.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج مسابقة الطارف</td>
+        <td>01/11/2025</td>
+        <td><a href="mostarf.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج المسابقة العربية</td>
+        <td>28/12/2025</td>
+        <td><a href="mosarab.pdf" target="_blank">Open</a></td>
+      </tr>
+      <tr>
+        <td>نماذج أخرى</td>
+        <td>-</td>
+        <td><a href="namadij.pdf" target="_blank">Open</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
   <section class="hero" id="games">
     <div class="card">
       <h1 id="titlegame">ألعاب ذكاء مقترحة</h1>
