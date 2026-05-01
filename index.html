@@ -534,13 +534,14 @@ buttonc:active {
 
 
 /* From Uiverse.io by saritha_7555 */ 
-.btn-wrapper {
+
+  .btn-wrapper {
   --width: 150px;
   --height: 60px;
   --padding: 8px;
   --border-radius: 24px;
   --dot-size: 8px;
-  --btn-color: #000000;
+  --btn-color: #000;
   --hue: 14deg;
   --animation-duration: 1.2s;
 
@@ -552,17 +553,7 @@ buttonc:active {
   height: var(--height);
   border-radius: var(--border-radius);
   background-color: #00000008;
-  box-shadow:
-    1px 1px 2px 0 #fffd,
-    2px 2px 2px #0001 inset,
-    2px 2px 4px #0001 inset,
-    2px 2px 8px #0001 inset;
-  perspective: 150px;
   cursor: pointer;
-  user-select: none;
-  transition:
-    box-shadow 0.05s linear,
-    transform 0.05s linear;
 }
 
 .toggle {
@@ -570,123 +561,47 @@ buttonc:active {
   width: 100%;
   height: 100%;
   opacity: 0;
-  z-index: 5;
-  cursor: pointer;
 }
 
 .btn {
   display: flex;
   align-items: center;
-  justify-content: start;
-  gap: 0.25em;
-  text-align: left;
-  padding: 0 var(--height) 0 calc(var(--padding) * 2);
-  width: calc(100% - 2 * var(--padding));
-  height: calc(100% - 2 * var(--padding));
-  border-radius: calc(var(--border-radius) - var(--padding));
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(#fff2, #0001), var(--btn-color);
-  box-shadow:
-    1px 1px 2px -1px #fff inset,
-    0 2px 1px #00000010,
-    0 4px 2px #00000010,
-    0 8px 4px #00000010,
-    0 16px 8px #00000010,
-    0 32px 16px #00000010;
-  transition:
-    transform 0.15s cubic-bezier(0.25, 1.5, 0.5, 1.5),
-    box-shadow 0.15s ease,
-    filter 0.15s ease;
-  z-index: 2;
+  padding-left: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: #000;
+  color: white;
 }
 
 .btn-txt {
   position: absolute;
-  font-family: "Montserrat", "Manrope", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.616);
-  background-image: linear-gradient(#000a, #555);
-  background-clip: text;
-  filter: drop-shadow(0 1px 0px #fff) drop-shadow(0 -1px 0px #0005);
-  transition: opacity 0.2s ease;
+  left: 20px;
+  transition: 0.2s;
 }
 
-.playing {
-  opacity: 0;
-}
+.playing { opacity: 0; }
 
-.toggle:checked ~ .btn .play {
-  opacity: 0;
-}
-.toggle:checked ~ .btn .playing {
-  opacity: 1;
-}
+.toggle:checked ~ .btn .play { opacity: 0; }
+.toggle:checked ~ .btn .playing { opacity: 1; }
 
 .dot {
   position: absolute;
-  top: 50%;
-  right: calc(var(--height) / 2 - var(--padding) / 2);
-  width: var(--dot-size);
-  aspect-ratio: 1/1;
+  right: 20px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: hsla(var(--hue), 0%, 50%, 0.1);
-  border: 1px solid hsla(var(--hue), 0%, 60%, 0.6);
-  box-shadow:
-    1px 1px 2px -1px #fffe inset,
-    0 2px 1px #00000010,
-    0 4px 2px #00000010,
-    0 8px 4px #00000010;
-  pointer-events: none;
-  z-index: 3;
-  transform: translateY(-50%);
-  transition: all 0.15s ease;
+  background: gray;
 }
 
 @keyframes pulse {
-  0%,
-  100% {
-    transform: scale(0.8) translateY(-50%);
-    opacity: 0.4;
-  }
-  50% {
-    transform: scale(1.3) translateY(-50%);
-    opacity: 1;
-  }
+  0%,100% { transform: scale(0.8); }
+  50% { transform: scale(1.4); }
 }
 
 .toggle:checked ~ .btn .dot {
-  animation: pulse var(--animation-duration) ease-in-out infinite;
-  background-color: hsl(var(--hue), 90%, 50%);
-  box-shadow:
-    0 0 6px 1px hsl(var(--hue), 100%, 50%),
-    0 0 20px 5px hsl(var(--hue), 100%, 60%, 0.4);
-}
-
-/* ----------------- Hover & Tactile Press ----------------- */
-.btn-wrapper:hover .btn,
-.btn-wrapper:focus-within .btn {
-  transform: translate3d(0, -2px, 2px);
-  filter: drop-shadow(
-    var(--padding) 0 var(--padding) hsla(var(--hue), 70%, 60%, 0.6)
-  );
-}
-
-.btn-wrapper:active .btn {
-  transform: translate3d(0, 2px, -2px);
-  box-shadow:
-    1px 1px 2px 0 #fff,
-    2px 2px 2px #0001 inset,
-    2px 2px 4px #0001 inset,
-    2px 2px 8px #0001 inset,
-    0 0 32px 2px hsla(var(--hue), 50%, 50%, 0.5) inset;
-}
-
-
-  .special-btn {
-
-    
+  animation: pulse 1s infinite;
+  background: red;
 }
   
 </style>
@@ -792,22 +707,24 @@ buttonc:active {
         <div class="fouk">
           <!-- From Uiverse.io by Yaya12085 --> 
 
-<btn href="https://play.google.com/store/apps/details?id=com.fast.zed.soroban"  class="btn-wrapper special-btn">
-  <input type="checkbox" class="toggle" />
+          <label class="btn-wrapper" onclick="goToLink('btn1','https://play.google.com/store/apps/details?id=com.fast.zed.soroban')">
+  <input type="checkbox" class="toggle" id="btn1"/>
   <div class="btn">
     <span class="btn-txt play">Download Fast ZED Soroban</span>
-    <span class="btn-txt playing">Downloading</span>
+    <span class="btn-txt playing">Downloading...</span>
     <div class="dot"></div>
   </div>
-</btn>
-    <btn href="https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh" class="btn-wrapper special-btn">
-  <input type="checkbox" class="toggle" />
+</label>
+
+<!-- BUTTON 2 -->
+<label class="btn-wrapper" onclick="goToLink('btn2','https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh" class="btn-wrapper special-btn')">
+  <input type="checkbox" class="toggle" id="btn2"/>
   <div class="btn">
     <span class="btn-txt play">Download ZED Soroban</span>
-    <span class="btn-txt playing">Downloading</span>
+    <span class="btn-txt playing">Downloading...</span>
     <div class="dot"></div>
   </div>
-</btn>  
+</label>
         </div>
   </section>     
   
@@ -1053,7 +970,16 @@ buttonc:active {
         document.getElementById("subtitlepub").innerText = "We have dedicated this space for you to submit your advertisements so that they can be customized and distributed"; 
       }
     }
-  
+
+
+function goToLink(id, url) {
+  const toggle = document.getElementById(id);
+  toggle.checked = true;
+
+  setTimeout(() => {
+    window.open(url, "_blank");
+  }, 700);
+}
 
   </script>
 </body>
