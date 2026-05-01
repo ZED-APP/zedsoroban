@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+style my buttons of:                     <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -251,84 +251,24 @@ footer{
 
 
 
-  /* ===== PREMIUM BUTTON SYSTEM ===== */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  padding: 12px 22px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.25);
-
-  font-weight: 600;
-  font-size: 15px;
+  /* From Uiverse.io by ke1221 */ 
+buttonc {
+  color: #090909;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  background: #e8e8e8;
   cursor: pointer;
-
-  backdrop-filter: blur(10px);
-  transition: all 0.35s cubic-bezier(.2,.8,.2,1);
-
-  position: relative;
-  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
-/* glow effect */
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.6), transparent);
-  transform: translateX(-100%);
-  transition: 0.6s;
+buttonc:active {
+  color: #666;
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
 
-/* hover */
-.btn:hover::before {
-  transform: translateX(100%);
-}
-
-.btn:hover {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 10px 30px rgba(0,255,255,0.4);
-}
-
-/* click */
-.btn:active {
-  transform: scale(0.96);
-}
-
-/* ===== VARIANTS ===== */
-.btn-blue {
-  background: linear-gradient(135deg,#4facfe,#00f2fe);
-  color: #000;
-}
-
-.btn-green {
-  background: linear-gradient(135deg,#43e97b,#38f9d7);
-  color: #000;
-}
-
-.btn-purple {
-  background: linear-gradient(135deg,#667eea,#764ba2);
-  color: #fff;
-}
-
-.btn-pink {
-  background: linear-gradient(135deg,#fa709a,#fee140);
-  color: #000;
-}
-
-.btn-dark {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-}
-
-/* small button */
-.btn-sm {
-  padding: 8px 14px;
-  font-size: 13px;
-}
 /* ===== ANIMATIONS ===== */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(40px)}
@@ -395,10 +335,10 @@ footer{
       <img src="pro.PNG" alt="Kids Learning"> 
       <div style="height:20px;"></div>
          <div class="fouk">
-         <a href="install.pdf" target="_blank" class="btn btn-dark btn-sm">⬇️ كيفية التثبيت How to install </a>
-         <a href="ZED SETUP ntfrmw 3.5.rar" target="_blank" class="btn btn-dark btn-sm">⬇️ Download (1) </a>
+         <buttonc href="install.pdf" target="_blank">⬇️ كيفية التثبيت How to install </buttonc>
+         <a href="ZED SETUP ntfrmw 3.5.rar" target="_blank">⬇️ Download (1) </a>
          <p id="text5">أو جرب هذا</p>
-         <a href="ZED SETUP.rar" target="_blank" class="btn btn-dark btn-sm">⬇️ Download (2) </a>
+         <a href="ZED SETUP.rar" target="_blank">⬇️ Download (2) </a>
          </div>
       </div>
       <div class="card" >
@@ -407,8 +347,8 @@ footer{
       <p id="text4">تحميل نسخة الأندرويد للهاتف</p>
       <div style="height:20px;"></div>
         <div class="fouk">
-         <a href="https://play.google.com/store/apps/details?id=com.fast.zed.soroban" class="btn btn-dark btn-sm">⬇️ Fast ZED Soroban</a>  
-         <a href="https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh" class="btn btn-dark btn-sm">⬇️ ZED Soroban</a>  
+         <a href="https://play.google.com/store/apps/details?id=com.fast.zed.soroban">⬇️ Fast ZED Soroban</a>  
+         <a href="https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh">⬇️ ZED Soroban</a>  
         </div>
       </div>
   </section>
