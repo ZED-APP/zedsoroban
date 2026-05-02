@@ -578,16 +578,13 @@ buttonc:active {
   justify-content: start;
   gap: 0.25em;
   text-align: left;
-  padding: 0 var(--height) 0 calc(var(--padding) * 4);
-
+  padding: 5px var(--height) 0 calc(var(--padding) * 4);
   width: 100% ;
   height: calc(100% - 2 * var(--padding));
   border-radius: calc(var(--border-radius) - var(--padding));
   border: none;
   cursor: pointer;
-
   background: linear-gradient(#fff2, #0001), var(--btn-color);
-
   box-shadow:
     1px 1px 2px -1px #fff inset,
     0 2px 1px #00000010,
@@ -601,13 +598,11 @@ buttonc:active {
     box-shadow 0.25s cubic-bezier(0.25, 1.5, 0.5, 1),
     filter 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
   will-change: transform, filter;
-
   z-index: 2;
 }
 
 .buttonff-txt {
-  display: inline-block;
-
+ 
   font-size: 16px;
   font-weight: 600;
   font-family: "Montserrat", "Manrope", sans-serif;
