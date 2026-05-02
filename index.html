@@ -1,1150 +1,173 @@
-                 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>ZED Soroban</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg-dark: linear-gradient(135deg,#020024,#090979,#00d4ff);
-  --glass: rgba(255,255,255,.14);
-  --border: rgba(255,255,255,.25);
-  --blur: blur(22px);
-  --radius: 22px;
-  --text-light:#fff;
-  --text-dark:#111;
-  --accent:#7cf7ff;
-}
-/* ===== GLOBAL ===== */
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:'Tajawal',sans-serif;
-  background:radial-gradient(circle at top,#0ff3,transparent),
-  linear-gradient(180deg,#0b1026,#020617);
-  color:var(--text-light);
-  overflow-x:hidden;
-}
-body.light{
-  background:#f5f7fb;
-  color:var(--text-dark);
-}
-a{
-  color:inherit;
-  text-decoration:none;
-}
-  abtn{
-    
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZED Soroban</title>
 
-/* ===== BACKGROUND BLOBS ===== */
-.background{
-  position:fixed;
-  inset:0;
-  z-index:-1;
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b1026;
+  --card:#ffffff10;
+  --border:#ffffff20;
+  --radius:16px;
+  --accent:#00f2fe;
 }
-.circle{
-  position:absolute;
-  width:300px;height:300px;
-  border-radius:50%;
-  filter:blur(90px);
-  opacity:.35;
-  animation:float 25s infinite linear;
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:linear-gradient(180deg,#0b1026,#020617);
+  color:#fff;
 }
-.circle:nth-child(1){background:#00ffd5;top:-80px;left:-80px}
-.circle:nth-child(2){background:#ff7eb3;bottom:-100px;right:-100px}
-.circle:nth-child(3){background:#facc15;top:40%;left:60%}
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-60px)}
-  100%{transform:translateY(0)}
-}
-/* ===== NAVBAR ===== */
+
+/* NAV */
 nav{
   position:sticky;
   top:0;
-  z-index:100;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:0px 0px;
-  backdrop-filter:var(--blur);
-  background:var(--glass);
-  border-bottom:1px solid var(--border);
-}
-nav .logo{
-  font-size:1.4rem;
-  font-weight:650;
-  letter-spacing:.5px;
+  padding:12px 20px;
+  background:#00000070;
+  backdrop-filter:blur(8px);
 }
 nav ul{
-  list-style:none;
   display:flex;
-  gap:18px;
-  padding:0;
-  margin:0;
+  gap:10px;
+  list-style:none;
 }
-nav ul a{
-  padding:0px 0px;
-  border-radius:14px;
-  transition:.3s;
-}
-nav ul a:hover{
-  background:rgba(255,255,255,.18);
-  color:var(--accent);
-}
-.fouk{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.switches button{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:8px 14px;
-  cursor:pointer;
-  backdrop-filter:var(--blur);
-  transition:.3s;
-}
-.switches button:hover{
-  transform:scale(1.07);
-}
-/* ===== HERO ===== */
+nav a{color:#fff;font-size:14px}
+
+/* HERO */
 .hero{
-  padding:120px 20px 70px;
+  padding:80px 20px;
   text-align:center;
 }
-.hero h1{
-  font-size:clamp(2rem,4vw,3rem);
-  margin-bottom:16px;
-}
-.hero p{
-  max-width:780px;
-  margin:auto;
-  opacity:.9;
-  font-size:1.15rem;
-}
-/* ===== VIDEO ===== */
-.video-background{
-  position:fixed;
-  inset:0;
-  object-fit:cover;
-  z-index:-2;
-  opacity:.25;
-}
-/* ===== CARDS GRID ===== */
+.hero h1{font-size:28px;margin-bottom:10px}
+.hero p{opacity:.8}
+
+/* GRID */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:26px;
-  padding:30px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:15px;
+  padding:20px;
 }
-/* ===== CARD ===== */
+
+/* CARD */
 .card{
-  background:var(--glass);
+  background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  backdrop-filter:var(--blur);
-  padding:26px;
+  padding:16px;
   text-align:center;
-  box-shadow:0 30px 80px rgba(0,0,0,.35);
-  transition:.45s cubic-bezier(.2,.8,.2,1);
-  animation:fadeUp .9s ease both;
+  transition:.2s;
 }
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 40px 120px rgba(0,255,255,.25);
+  transform:translateY(-4px);
 }
+
 .card img{
-  max-width:100%;
-  border-radius:16px;
-  margin-bottom:16px;
+  width:100%;
+  border-radius:10px;
+  margin-bottom:10px;
 }
-.card h3{
-  margin:10px 0;
-  font-size:1.3rem;
-}
-.card p{
-  opacity:.9;
-}
-/* ===== BUTTON LINKS ===== */
-.card a{
+
+/* BUTTON */
+.btn{
   display:inline-block;
-  margin-top:12px;
-  padding:10px 18px;
-  border-radius:16px;
+  padding:10px 14px;
+  margin-top:10px;
   background:linear-gradient(135deg,#00f2fe,#4facfe);
+  border-radius:10px;
   color:#000;
-  font-weight:600;
-  transition:.35s;
+  font-weight:bold;
 }
-.card a:hover{
-  transform:scale(1.05);
-  box-shadow:0 10px 30px rgba(0,255,255,.6);
+
+/* TABLE */
+.table-container{
+  padding:20px;
 }
-/* ===== FOOTER ===== */
+table{
+  width:100%;
+  background:#fff;
+  color:#000;
+  border-radius:10px;
+  overflow:hidden;
+}
+th,td{
+  padding:10px;
+  text-align:center;
+}
+tr:hover{background:#eee}
+
+/* FOOTER */
 footer{
   text-align:center;
-  padding:30px;
-  margin-top:60px;
-  backdrop-filter:var(--blur);
-  background:var(--glass);
-  border-top:1px solid var(--border);
+  padding:20px;
+  opacity:.7;
 }
 
-.table-container {
-  width: 90%;
-  margin: 40px auto;
-  background: #e8e8e8;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.table-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: black;
-}
-
-.modern-table {
-  width: 100%;
-  border-collapse: collapse;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.modern-table thead {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  color: black;
-}
-
-.modern-table th, 
-.modern-table td {
-  padding: 14px 16px;
-  text-align: center;
-  color: black;
-}
-
-.modern-table tbody tr {
-  border-bottom: 1px solid #eee;
-  transition: 0.3s;
-}
-
-.modern-table tbody tr:hover {
-  background: #f1f7ff;
-  transform: scale(1.01);
-}
-
-.modern-table a {
-
-  color: black;
-  background: #4facfe;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.modern-table a:hover {
-  background: #e8e8e8;
-}
-
-
-
-  /* From Uiverse.io by ke1221 */ 
-buttonc {
-  color: #090909;
-  padding: 0.5em 1.7em;
-  font-size: 13px;
-  border-radius: 0.5em;
-  background: #e8e8e8;
-  cursor: pointer;
-  border: 1px solid #e8e8e8;
-  transition: all 0.3s;
-  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-}
-
-buttonc:active {
-  color: #666;
-  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
-}
-/* From Uiverse.io by MikeAndrewDesigner */ 
-.e-card {
-  margin: 100px auto;
-  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
-  position: relative;
-  width: 90%;
-  height: 500px;
-  border-radius: 16px;
-  overflow: hidden;
-  backdrop-filter:var(--blur);
-  background:var(--glass);
-}
-
-.wave {
-  position: absolute;
-  width: 540px;
-  height: 700px;
-  opacity: 0.6;
-  left: 40%;
-  top: 40%;
-  margin-left: -50%;
-  margin-top: -70%;
-  background: linear-gradient(744deg,#af40ff,#5b42f3 60%,#00ddeb);
-}
-
-.icon {
-  width: 3em;
-  margin-top: -1em;
-  padding-bottom: 1em;
-}
-
-.infotop {
-  text-align: center;
-  font-size: 20px;
-  position: absolute;
-  top: 5.6em;
-  left: 0;
-  right: 0;
-  color: rgb(255, 255, 255);
-  font-weight: 600;
-}
-
-.name {
-  font-size: 14px;
-  font-weight: 100;
-  position: relative;
-  top: 1em;
-  text-transform: lowercase;
-}
-
-.wave:nth-child(2),
-.wave:nth-child(3) {
-  top: 210px;
-}
-
-.playing .wave {
-  border-radius: 40%;
-  animation: wave 3000ms infinite linear;
-}
-
-.wave {
-  border-radius: 40%;
-  animation: wave 55s infinite linear;
-}
-
-.playing .wave:nth-child(2) {
-  animation-duration: 4000ms;
-}
-
-.wave:nth-child(2) {
-  animation-duration: 50s;
-}
-
-.playing .wave:nth-child(3) {
-  animation-duration: 5000ms;
-}
-
-.wave:nth-child(3) {
-  animation-duration: 45s;
-}
-
-
-  
-@keyframes wave {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-  
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:none}
-}
-/* ===== MOBILE ===== */
+/* MOBILE OPTIMIZATION */
 @media(max-width:768px){
   nav ul{display:none}
-    nav ul{display:none}
-    .modern-table th, .modern-table td {
-    padding: 10px;
-    font-size: 14px;
-  }
 }
-
-
-/* From Uiverse.io by andrew-manzyk */ 
-.loader {
-  --color-one: #ffbf48;
-  --color-two: #be4a1d;
-  --color-three: #ffbf4780;
-  --color-four: #bf4a1d80;
-  --color-five: #ffbf4740;
-  --time-animation: 2s;
-  --size: 1; /* You can change the size */
-  position: relative;
-  border-radius: 50%;
-  transform: scale(var(--size));
-  box-shadow:
-    0 0 25px 0 var(--color-three),
-    0 20px 50px 0 var(--color-four);
-  animation: colorize calc(var(--time-animation) * 3) ease-in-out infinite;
-}
-
-.loader::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border-top: solid 1px var(--color-one);
-  border-bottom: solid 1px var(--color-two);
-  background: linear-gradient(180deg, var(--color-five), var(--color-four));
-  box-shadow:
-    inset 0 10px 10px 0 var(--color-three),
-    inset 0 -10px 10px 0 var(--color-four);
-}
-
-.loader .box {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(
-    180deg,
-    var(--color-one) 30%,
-    var(--color-two) 70%
-  );
-  mask: url(#clipping);
-  -webkit-mask: url(#clipping);
-}
-
-.loader svg {
-  position: absolute;
-}
-
-.loader svg #clipping {
-  filter: contrast(15);
-  animation: roundness calc(var(--time-animation) / 2) linear infinite;
-}
-
-.loader svg #clipping polygon {
-  filter: blur(7px);
-}
-
-.loader svg #clipping polygon:nth-child(1) {
-  transform-origin: 75% 25%;
-  transform: rotate(90deg);
-}
-
-.loader svg #clipping polygon:nth-child(2) {
-  transform-origin: 50% 50%;
-  animation: rotation var(--time-animation) linear infinite reverse;
-}
-
-.loader svg #clipping polygon:nth-child(3) {
-  transform-origin: 50% 60%;
-  animation: rotation var(--time-animation) linear infinite;
-  animation-delay: calc(var(--time-animation) / -3);
-}
-
-.loader svg #clipping polygon:nth-child(4) {
-  transform-origin: 40% 40%;
-  animation: rotation var(--time-animation) linear infinite reverse;
-}
-
-.loader svg #clipping polygon:nth-child(5) {
-  transform-origin: 40% 40%;
-  animation: rotation var(--time-animation) linear infinite reverse;
-  animation-delay: calc(var(--time-animation) / -2);
-}
-
-.loader svg #clipping polygon:nth-child(6) {
-  transform-origin: 60% 40%;
-  animation: rotation var(--time-animation) linear infinite;
-}
-
-.loader svg #clipping polygon:nth-child(7) {
-  transform-origin: 60% 40%;
-  animation: rotation var(--time-animation) linear infinite;
-  animation-delay: calc(var(--time-animation) / -1.5);
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes roundness {
-  0% {
-    filter: contrast(15);
-  }
-  20% {
-    filter: contrast(3);
-  }
-  40% {
-    filter: contrast(3);
-  }
-  60% {
-    filter: contrast(15);
-  }
-  100% {
-    filter: contrast(15);
-  }
-}
-
-@keyframes colorize {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  20% {
-    filter: hue-rotate(-30deg);
-  }
-  40% {
-    filter: hue-rotate(-60deg);
-  }
-  60% {
-    filter: hue-rotate(-90deg);
-  }
-  80% {
-    filter: hue-rotate(-45deg);
-  }
-  100% {
-    filter: hue-rotate(0deg);
-  }
-}
-
-
-
-
-
-/* From Uiverse.io by saritha_7555 */ 
-/* From Uiverse.io by dexter-st */ 
-.buttonff-wrapper {
-  --width: 100%;
-  --height: 60px;
-  --padding: 6px;
-  --border-radius: 30px;
-  --dot-size: 11px;
-  --btn-color: #202020;
-  --hue: 355deg;
-  --animation-duration: 1.2s;
-
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--width);
-  height: var(--height);
-  border-radius: var(--border-radius);
-  border: none;
-
-  background-color: #00000008;
-
-  box-shadow:
-    1px 1px 2px 0 #fffd,
-    2px 2px 2px #0001 inset,
-    2px 2px 4px #0001 inset,
-    2px 2px 8px #0001 inset;
-
-  transition: box-shadow 50ms linear;
-
-  perspective: 150px;
-  perspective-origin: center;
-
-  user-select: none;
-  z-index: 1;
-}
-
-.buttonff {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 0.25em;
-  text-align: left;
-  padding: 0 var(--height) 0 calc(var(--padding) * 4);
-
-  width: 100% ;
-  height: calc(100% - 2 * var(--padding));
-  border-radius: calc(var(--border-radius) - var(--padding));
-  border: none;
-  cursor: pointer;
-
-  background: linear-gradient(#fff2, #0001), var(--btn-color);
-
-  box-shadow:
-    1px 1px 2px -1px #fff inset,
-    0 2px 1px #00000010,
-    0 4px 2px #00000010,
-    0 8px 4px #00000010,
-    0 16px 8px #00000010,
-    0 32px 16px #00000010;
-
-  transition:
-    transform 0.25s cubic-bezier(0.25, 1.5, 0.5, 2.2),
-    box-shadow 0.25s cubic-bezier(0.25, 1.5, 0.5, 1),
-    filter 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
-  will-change: transform, filter;
-
-  z-index: 2;
-}
-
-.buttonff-txt {
-  display: inline-block;
-
-  font-size: 16px;
-  font-weight: 600;
-  font-family: "Montserrat", "Manrope", sans-serif;
-  letter-spacing: 1px;
-
-  color: #fff9;
-  background-image: linear-gradient(#fffc, #000a);
-  background-clip: text;
-  filter: drop-shadow(0 1px 0px #fff8) drop-shadow(0 -1px 0px #0006);
-}
-
-.disclaimer-txt {
-  position: absolute;
-  left: var(--border-radius);
-  bottom: -24px;
-  font-family: "Montserrat", "Manrope", sans-serif;
-  font-size: 12px;
-  color: #0009;
-}
-
-.dot {
-  position: absolute;
-  top: calc(50% - var(--dot-size) / 2);
-  right: calc(var(--height) / 2 - var(--padding) / 2);
-  width: var(--dot-size);
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background-color: hsla(var(--hue), 0%, 50%, 0.1);
-
-  border: 1px solid hsla(var(--hue), 0%, 60%, 0.6);
-  box-sizing: border-box;
-
-  box-shadow:
-    1px 1px 2px -1px #fffe inset,
-    0 2px 1px #00000010,
-    0 4px 2px #00000010,
-    0 8px 4px #00000010;
-
-  pointer-events: none;
-  z-index: 3;
-}
-
-.dot::before {
-  content: "";
-  position: absolute;
-  top: calc(var(--padding) / -2);
-  left: calc(var(--padding) / -2);
-  width: calc(100% + var(--padding));
-  height: calc(100% + var(--padding));
-  border-radius: inherit;
-  background-color: #0006;
-  mask-image: radial-gradient(circle at 50% 60%, transparent 50%, black);
-}
-
-.dot::after {
-  content: "";
-  position: absolute;
-  top: calc(var(--padding) / -2);
-  left: calc(var(--padding) / -2);
-  width: calc(100% + var(--padding));
-  height: calc(100% + var(--padding));
-  border-radius: inherit;
-  background-color: #0000;
-
-  box-shadow:
-    0 0 10px 2px hsla(var(--hue), 80%, 50%, 0.3),
-    0 0 20px 10px hsla(var(--hue), 80%, 50%, 0.5),
-    0 0 50px 20px hsla(var(--hue), 80%, 50%, 0.5),
-    0 0 16px 1px hsla(var(--hue), 100%, 60%, 0.9) inset;
-
-  opacity: 0;
-}
-
-@keyframes bg-anim {
-  0%,
-  100% {
-    background-color: hsla(var(--hue), 50%, 50%, 0);
-  }
-  50% {
-    background-color: hsla(var(--hue), 100%, 50%, 1);
-  }
-}
-
-@keyframes opacity-anim {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.buttonff:hover,
-.buttonff:focus-visible {
-  filter: drop-shadow(
-    var(--padding) 0 var(--padding) hsla(var(--hue), 70%, 60%, 0.6)
-  );
-  transform: translate3d(0, 0px, 3px);
-
-  .buttonff-txt {
-    background-color: hsla(var(--hue), 50%, 50%, 1);
-    background-image: none;
-  }
-
-  .pulse {
-    &.dot {
-      animation: none;
-      background-color: hsla(var(--hue), 100%, 50%, 1);
-    }
-    &::after {
-      animation: none;
-      opacity: 1;
-    }
-  }
-}
-
-.buttonff:focus-visible {
-  outline: 2px dashed hsla(var(--hue), 70%, 40%, 1);
-  outline-offset: var(--padding);
-}
-
-.buttonff:focus {
-  .pulse {
-    transition: transform 200ms ease-in;
-
-    &.dot {
-      animation: bg-anim var(--animation-duration) ease-in-out infinite;
-    }
-
-    &::after {
-      animation: opacity-anim var(--animation-duration) ease-in-out infinite;
-    }
-  }
-}
-
-.buttonff:active {
-  filter: drop-shadow(
-    var(--padding) 0 var(--padding) hsla(var(--hue), 100%, 50%, 1)
-  );
-  transform: translate3d(0, 0, -4px);
-
-  .buttonff-txt {
-    background-color: hsla(var(--hue), 50%, 50%, 1);
-  }
-
-  ~ .dot {
-    animation-play-state: paused;
-    background-color: hsla(var(--hue), 100%, 50%, 1);
-  }
-}
-
-.buttonff-wrapper:has(.buttonff:active) {
-  box-shadow:
-    1px 1px 2px 0 #fff,
-    2px 2px 2px #0001 inset,
-    2px 2px 4px #0001 inset,
-    2px 2px 8px #0001 inset,
-    0 0 32px 2px hsla(var(--hue), 50%, 50%, 0.5) inset;
-}
-#bfbf{
-}
-  
 </style>
 </head>
+
 <body>
-  <!-- Background Animation -->
-  <div class="background">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-  </div>
-  <!-- Navbar -->
-  <nav>
-    <!-- From Uiverse.io by andrew-manzyk --> 
-<div class="loader">
-  <svg width="30" height="30" viewBox="0 0 30 30">
-    <defs>
-      <mask id="clipping">
-        <polygon points="0,0 100,0 100,100 0,100" fill="black"></polygon>
-        <polygon points="25,25 75,25 50,75" fill="white"></polygon>
-        <polygon points="50,25 75,75 25,75" fill="white"></polygon>
-        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
-        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
-        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
-        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
-      </mask>
-    </defs>
-  </svg>
-  <div class="box"></div>
-</div>
 
+<nav>
+  <div>ZED Soroban</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#download">Download</a></li>
+    <li><a href="#games">Games</a></li>
+  </ul>
+</nav>
 
-  <div class="logo">ZED Soroban</div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#description">Description</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#download">Download</a></li>
-      <li><a href="#PDF">PDF</a></li>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#pub">pub</a></li>
-    </ul>
-    <div class="switches">
-    <button onclick="toggleTheme()">☀️</button>
-    <button onclick="toggleLang()">AR/EN</button>
-    </div>
-  </nav>
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <!-- From Uiverse.io by MikeAndrewDesigner --> 
-<div class="e-card playing">
-  <div class="image"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="wave"></div>
-  <div class="infotop">
-   <img src="FAST ZED SOROBAN PNG.png" fill="none" viewBox="0 0 50 50" class="icon"> <h1>      
-مرحبا بكم في منصة
-     <br>
-زاد سوروبان - ZED Soroban
-</h1>
-<div class="name">تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار</div>
-  </div>
-</div>
-
-
-    
-   
-  </section>
-    <video class="video-background" autoplay muted loop playsinline>
-  <source src="1.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <!-- Cards -->
-  <section class="cards" id="description">
-    <div class="card">
-    <h3 id="card1">ابدأ رحلتك الآن</h3>
-    <img src="poster.jpg">
-
-      </div>
-
-
-
-         <div class="card" id="download">
-      <h3 id="card3">تحميل الويندوز</h3>
-      <img src="pro.PNG" alt="Kids Learning"> 
-      <div style="height:20px;"></div>
-         <div class="fouk">
-         <a href="install.pdf" target="_blank">⬇️ كيفية التثبيت How to install </a>
-         <a href="ZED SETUP ntfrmw 3.5.rar" target="_blank">⬇️ Download (1) </a>
-         <p id="text5">أو جرب هذا</p>
-         <a href="ZED SETUP.rar" target="_blank">⬇️ Download (2) </a>
-         </div>
-      </div>
-
-    
-      <div class="card" >
-      <h3 id="card4">تحميل للهاتف أندرويد</h3>
-      <img src="tel.PNG">
-      <p id="text4">تحميل نسخة الأندرويد للهاتف</p>
-      <div style="height:20px;"></div>
-        <div class="fouk">
-          <!-- From Uiverse.io by Yaya12085 --> 
-<div  class="buttonff-wrapper" onclick="window.location.href='https://play.google.com/store/apps/details?id=com.fast.zed.soroban'">
-  <button class="buttonff"  href="https://play.google.com/store/apps/details?id=com.fast.zed.soroban">
-    <span class="buttonff-txt">Download Fast ZED Soroban</span>
-    <div class="dot pulse"></div>
- </button>
-</div>
-
-
-
- <div class="buttonff-wrapper" onclick="window.location.href='https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh'">
-  <button class="buttonff"  href="https://play.google.com/store/apps/details?id=com.zedsoroban.gamesinogh">
-    <span class="buttonff-txt">Download ZED Soroban</span>
-    <div class="dot pulse"></div>
- </button
-</div>
-
-      
-        </div>
-  </section>     
-  
-   
-  <section class="hero" id="PDF">
-      <div class="card">
-        <h1 id="titlegame">نساهم في إنجاح العديد من المسابقات والبطولات</h1>
-        <p id="subtitlegame">من خلال تنشيط فقرة فلاش أنزان الشيقة وكذا توفير نماذج اختبارات السوروبان المطبوعة بمختلف المستويات ومشفرة بتقنية الكيو آر QR باستخدام منصة زاد سوروبان</p>
-    </div>
-  </section>
- <section class="table-container" id="webapps">
-  <h2>📄 النماذج</h2>
-
-  <table class="modern-table">
-    <thead>
-      <tr>
-        <th>📌 العنوان</th>
-        <th>📅 التاريخ</th>
-        <th>🔗 الرابط</th>
-      </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>نماذج خاصة بمسابقة موجة البحر بدرارية الجزائر العاصمة</td>
-        <td>18/04/2026</td>
-        <td><buttonc href="mojadraria.pdf" target="_blank">Open</buttonc></td>
-    </tr>
-      <tr>
-        <td>نماذج خاصة بمسابقة الونشريس العربية</td>
-        <td>06/07/2025</td>
-        <td><buttonc href="wancha.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج خاصة بمسابقة موجة البحر الدرارية</td>
-        <td>01/05/2025</td>
-        <td><buttonc href="moja.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج خاصة ببطولة التاج للسوروبان</td>
-        <td>03/05/2025</td>
-        <td><buttonc href="taj.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج تحدي الأذكياء</td>
-        <td>-</td>
-        <td><buttonc href="smart.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج مسابقة موجة البحر سطاوالي</td>
-        <td>26/07/2025</td>
-        <td><buttonc href="mojasta.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج مسابقة الطارف</td>
-        <td>01/11/2025</td>
-        <td><buttonc href="mostarf.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج المسابقة العربية</td>
-        <td>28/12/2025</td>
-        <td><buttonc href="mosarab.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-      <tr>
-        <td>نماذج أخرى</td>
-        <td>-</td>
-        <td><buttonc href="namadij.pdf" target="_blank">Open</buttonc></td>
-      </tr>
-    </tbody>
-  </table>
+<section class="hero" id="home">
+  <h1>زاد سوروبان</h1>
+  <p>تعلم الحساب الذهني بطريقة ممتعة وسريعة</p>
 </section>
-  <section class="hero" id="games">
-    <div class="card">
-      <h1 id="titlegame">ألعاب ذكاء مقترحة</h1>
-      <p id="subtitlegame">إليك بعض ألعاب الذكاء التي قمنا بإضافتها، يمكنك استخدامها في تدريباتك وتنويع أنشطتك</p>
-     <!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
 
-<section id="games" style="padding:20px; font-family:sans-serif;">
-  <div style="
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-    gap:15px;
-  ">
-    <a href="https://zed-app.github.io/3D-ZED-Flash-Anzan/"target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       3D ZED Flash Anzan
-    </a>
-    <a href="https://zed-app.github.io/Guess-the-Number/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Guess the Number
-    </a>
-    <a href="https://zed-app.github.io/hectoc/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Hectoc
-    </a>
-    <a href="https://zed-app.github.io/memory/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#fa709a,#fee140);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Memory
-    </a>
-    <a href="https://zed-app.github.io/xoxo/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#30cfd0,#330867);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       XOXO
-    </a>
-    <a href="https://zed-app.github.io/Random-math-question/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#f7971e,#ffd200);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Random Math Question
-    </a>
-    <a href="https://zed-app.github.io/sodoku/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Sudoku
-    </a>
-    <a href="https://zed-app.github.io/bee/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#ff9a9e,#fecfef);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Spelling Bee
-    </a>
+<section class="cards">
+
+  <div class="card">
+    <h3>تحميل الويندوز</h3>
+    <img src="pro.PNG" loading="lazy">
+    <a class="btn" href="ZED SETUP.rar">Download</a>
   </div>
+
+  <div class="card">
+    <h3>تحميل الأندرويد</h3>
+    <img src="tel.PNG" loading="lazy">
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.fast.zed.soroban">Google Play</a>
+  </div>
+
 </section>
-      
-     </div>
-  </section>
-  <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
 
-  <section class="hero" id="contact">
-      <div class="card">
-       <h1 id="titlecontact">تواصل معنا</h1>
-       <p id="subtitlecontact">يمكنك التواصل مع فريق الدعم عبر فيسبوك كما يمكنك الإنضمام إلى مجموعة زاد سوروبان على مسنجر، مجموعة تليغرام فيها شروحات متعددة</p>
-      </div>
-  </section>
+<section class="table-container">
+<h2>النماذج</h2>
+<table>
+<tr><th>العنوان</th><th>الرابط</th></tr>
+<tr><td>نماذج مسابقة</td><td><a href="moja.pdf">فتح</a></td></tr>
+</table>
+</section>
 
-<!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ --> <section class="cards" id="webapps"> <div class="card"> <img src="facebook.png" style="width:60px; height:60px; border-radius:50%;" loading="lazy"> <h3>Facebook</h3> <a href="https://www.facebook.com/ZED.APP.05" target="_blank"> 🔗 ZED App</a> </div> <div class="card"> <img src="facebook.png" style="width:60px; height:60px; border-radius:50%;" loading="lazy"> <h3>Facebook</h3> <a href="https://www.facebook.com/mohamed.lemmou.7" target="_blank"> 🔗 LEMMOU Mohammed</a> </div> <div class="card"> <img src="messenger.png" style="width:60px; height:60px; border-radius:50%;" loading="lazy"> <h3>Messenger</h3> <a href="https://m.me/j/Abbe2tAnSTeaPqha/" target="_blank"> 🔗 ZED Soroban</a> </div> <div class="card"> <img src="telegram.png" style="width:60px; height:60px; border-radius:50%;" loading="lazy"> <h3>Telegram</h3> <a href="https://t.me/+YPWQ_CnoLSZhNjFk" target="_blank"> 🔗 ZED Soroban</a> </div> </section> <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
-<!-- puuuuuub ************************************************************************************************** -->
-<!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
+<section class="cards" id="games">
 
-  <section class="hero" id="pub">
-      <div class="card">
-          <h1 id="titlepub">مساحة مخصصة لإعلاناتكم</h1>
-    <p id="subtitlepub">خصصنا لكم هذه المساحة لاستقبال إعلاناتكم حتى يتسنى مشاركتها وانتشارها </p>
-      </div>
-  </section>
+<a class="card" href="https://zed-app.github.io/hectoc/" target="_blank">Hectoc</a>
+<a class="card" href="https://zed-app.github.io/xoxo/" target="_blank">XOXO</a>
+<a class="card" href="https://zed-app.github.io/sodoku/" target="_blank">Sudoku</a>
 
-  
-<!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
-  <section class="cards" id="webapps">
-    <div class="card">
-          <img src="p1.png" >
-      <h3> نجوم السوروبان، تنظيم الكوتش زردومي أحمد و الكوتش ل فهيمة </h3>
-       <p>الطبعة الثانية - 01 ماي 2026 بالجزائرالعاصمة</p>
-      <a href="https://www.facebook.com/share/1HMw1TJjiq/" target="_blank"> 🔗 التواصل ... </a>
-    </div>
-    
-<!--  <div class="card">
-       <img src="pub1.webp">
-       <h3>المسابقة الوطنية للحساب الذهني وألعاب الذكاء ببرج بوعريريج</h3>
-       <p> من تنظيم وزارة الشباب </p>
-       <p> التاريخ 31 مارس الى 02 أفريل 2026 </p>
-       <a href="https://www.facebook.com/share/p/177BVYwM2o/" target="_blank">  🔗 تفاصيل  ...</a>
-    </div>-->
-    
-    <div class="card">
-         <img src="moujat.jpg">
-      <h3>بطولة أجياد السوروبان بتيارت  </h3>
-       <p>من تنظيم المدربة كاتبي خديجة </p>
-         <p>بتاريخ 01 جوان 2026 </p>
-      <a href="https://web.facebook.com/ilyass.soroban" target="_blank"> 🔗 التواصل ...</a>
-    </div>
+</section>
 
-    <div class="card">
-         <img src="Raw.webp">
-      <h3> بانر أكاديمي باتنة </h3>
-       <p> 🚀 لأول مرة… بين يديك مجموعة كتب متكاملة لتعليم الحساب الذهني!
-📚 تشمل:✔️ السوروبان (6 مستويات)✔️ تقنيات الفيدا ( الجمع – الطرح – الضرب – القسمة)
-✔️ كتاب مميز لحفظ جدول الضرب بتقنيات التذكر🎴 + بطاقات تعليمية تساعد على المراجعة السريعة
-✨ اجعل طفلك سريع الحساب… قوي التركيز… واثق بنفسه
-📩 احجز نسختك الآن قبل نفاذ الكمية! </p>
-      <a href="https://www.facebook.com/share/1BHu8uS5kF/" target="_blank"> 🔗 أطلب الآن </a>
-    </div>   
-  </section>
-  <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
-  <!-- Footer -->
-  <footer>
-  <p>© 2019-2026 ZED Soroban. All rights reserved.</p>
-  </footer>
-  <script>
-    let isArabic = true;
-    function toggleTheme() {
-    document.body.classList.toggle('light');
-    }
+<footer>
+© 2019-2026 ZED Soroban
+</footer>
 
-    function toggleLang() {
-      isArabic = !isArabic;
-      if (isArabic) {
-        document.body.dir = "rtl";
-        document.getElementById("title").innerText = "مرحبًا بك في زاد سوروبان";
-        document.getElementById("subtitle").innerText = "تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار.";
-        document.getElementById("card1").innerText = "ابدأ رحلتك الآن";
-        document.getElementById("text1").innerText = "اكتشف فضاء زاد سوروبان وكن واحدا من هذه العائلة سواءا كنت مدربا أو متدربا على السوروبان";
-        document.getElementById("card2").innerText = "خدماتنا";
-        document.getElementById("text2").innerText = "فلاش أنزان، نماذج تدريب ومسابقات للطباعة، تدريبات ومسابقات رقمية حضورية وأونلاين";
-        document.getElementById("card3").innerText = "تحميل نسخة الويندوز للحاسوب";
-        document.getElementById("card4").innerText = "تحميل نسخة الهاتف للأندرويد";
-        //document.getElementById("text3").innerText = "تحميل نسخة الويندوز للحاسوب";
-        document.getElementById("text5").innerText = "أو جرب هذا";
-        document.getElementById("text4").innerText = "تحميل نسخة الأندرويد للهاتف!";
-        document.getElementById("titlegame").innerText = "ألعاب ذكاء مقترحة"; 
-        document.getElementById("subtitlegame").innerText = "إليك بعض ألعاب الذكاء التي قمنا بإضافتها، يمكنك استخدامها في تدريباتك وتنويع أنشطتك"; 
-        document.getElementById("titlecontact").innerText = "تواصل معنا!";
-        document.getElementById("subtitlecontact").innerText = " يمكنك التواصل مع فريق الدعم عبر فيسبوك كما يمكنك الإنضمام إلى مجموعة زاد سوروبان على مسنجر، مجموعة تليغرام فيها شروحات متعددة"; 
-         document.getElementById("titlepub").innerText = "مساحة مخصصة لإعلاناتكم";
-        document.getElementById("subtitlepub").innerText = "خصصنا لكم هذه المساحة لاستقبال إعلاناتكم حتى يتسنى مشاركتها وانتشارها"; 
-      } else {
-        document.body.dir = "ltr";
-        document.getElementById("title").innerText = "Welcome to ZED Soroban";
-        document.getElementById("subtitle").innerText = "Learn Japanese-style mental arithmetic using the soroban. A fun and educational interactive platform for children and adults.";
-        document.getElementById("card1").innerText = "Start your journey now";
-        document.getElementById("text1").innerText = "Discover the ZED Soroban space and become one of this family, whether you are a Soroban trainer or trainee.";
-        document.getElementById("card2").innerText = "Our Services";
-        document.getElementById("text2").innerText = "Flash Anzan, printable training and competition templates, in-person and online digital training and competitions";
-        document.getElementById("card3").innerText = "Download for Windows";
-        document.getElementById("card4").innerText = "Download for Android";
-      //  document.getElementById("text3").innerText = "Download for Windows";
-        document.getElementById("text5").innerText = "Or try this";
-        document.getElementById("text4").innerText = "Download for Android";
-        document.getElementById("titlegame").innerText = "Suggested brain games"; 
-        document.getElementById("subtitlegame").innerText = "Here are some brain games we've added; you can use them in your training and to diversify your activities."; 
-        document.getElementById("titlecontact").innerText = "Contact us!";
-        document.getElementById("subtitlecontact").innerText = "You can contact the support team via Facebook, and you can also join the Zad Soroban group on Messenger, a Telegram group with multiple explanations"; 
-        document.getElementById("titlepub").innerText = "A space dedicated to your advertisements";
-        document.getElementById("subtitlepub").innerText = "We have dedicated this space for you to submit your advertisements so that they can be customized and distributed"; 
-      }
-    }
-
-
-function goToLink(id, url) {
-  const toggle = document.getElementById(id);
-  toggle.checked = true;
-
-  setTimeout(() => {
-    window.open(url, "_blank");
-  }, 700);
-}
-
-  </script>
 </body>
 </html>
