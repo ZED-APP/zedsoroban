@@ -1032,21 +1032,21 @@ buttonc:active {
 
 
 
-  .player-text {
+.player-text {
   color: white;
   text-align: center;
   font-size: 12px;
-  animation: fadeSlide 2s ease-in-out infinite alternate;
+  animation: glowText 1.5s infinite alternate;
 }
 
-@keyframes fadeSlide {
+@keyframes glowText {
   from {
-    opacity: 0.4;
-    transform: translateY(5px);
+    opacity: 0.6;
+    text-shadow: 0 0 2px white;
   }
   to {
     opacity: 1;
-    transform: translateY(-5px);
+    text-shadow: 0 0 10px white, 0 0 20px cyan;
   }
 }
   
