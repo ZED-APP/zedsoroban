@@ -1032,21 +1032,25 @@ buttonc:active {
 
 
 
-.player-text {
-  color: white;
-  text-align: center;
-  font-size: 12px;
-  animation: glowText 1.5s infinite alternate;
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
 }
 
-@keyframes glowText {
-  from {
-    opacity: 0.6;
-    text-shadow: 0 0 2px white;
+.ticker p {
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+  animation: scrollText 8s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
   }
-  to {
-    opacity: 1;
-    text-shadow: 0 0 10px white, 0 0 20px cyan;
+  100% {
+    transform: translateX(-100%);
   }
 }
   
@@ -1160,7 +1164,6 @@ buttonc:active {
    </button>
    </div>
    <p id="text5">أو جرب هذا</p>
-    
    <div  class="buttonff-wrapper"  onclick="window.open('ZED SETUP.rar','_blank')">
    <button class="buttonff" >
    <span class="buttonff-txt">⬇️ Download (2)</span>
@@ -1212,7 +1215,7 @@ buttonc:active {
         frameborder="0"
         allowfullscreen>
       </iframe>
-      <p class="player-text">
+      <p class="ticker">
         فلاش أنزان بمسابقة موجة البحر درارية الجزائر العاصمة 18 أفريل 2026
       </p>
     </div>
@@ -1224,7 +1227,7 @@ buttonc:active {
         frameborder="0"
         allowfullscreen>
       </iframe>
-      <p class="player-text">
+      <p class="ticker">
         إنجاز تمارين بواسطة منصة Zed Soroban
       </p>
     </div>
