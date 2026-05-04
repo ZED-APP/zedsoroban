@@ -1030,6 +1030,25 @@ buttonc:active {
 }
 
 
+
+
+  .player-text {
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  animation: fadeSlide 2s ease-in-out infinite alternate;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0.4;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
   
 </style>
 </head>
@@ -1193,7 +1212,7 @@ buttonc:active {
         frameborder="0"
         allowfullscreen>
       </iframe>
-      <p style="color: white; text-align: center; font-size: 12px;">
+      <p class="player-text">
         فلاش أنزان بمسابقة موجة البحر درارية الجزائر العاصمة 18 أفريل 2026
       </p>
     </div>
@@ -1205,7 +1224,7 @@ buttonc:active {
         frameborder="0"
         allowfullscreen>
       </iframe>
-      <p style="color: white; text-align: center; font-size: 12px;">
+      <p class="player-text">
         إنجاز تمارين بواسطة منصة Zed Soroban
       </p>
     </div>
