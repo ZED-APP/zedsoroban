@@ -1,4 +1,4 @@
-                 <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -9,8 +9,10 @@
 <style>
 :root {
   --bg-dark: linear-gradient(135deg,#020024,#090979,#00d4ff);
+  --glass: rgba(255,255,255,.14);
 
   --border: rgba(255,255,255,.25);
+  --blur: blur(22px);
 
   --radius: 22px;
   --text-light:#fff;
@@ -37,7 +39,7 @@ a{
   text-decoration:none;
 }
   abtn{
-    
+
   }
 
 /* ===== BACKGROUND BLOBS ===== */
@@ -129,7 +131,7 @@ nav ul a:hover{
   opacity:1;
   font-size:1.15rem;
 }
-  
+
 /* ===== VIDEO ===== */
 .video-background{
   position:fixed;
@@ -190,6 +192,8 @@ footer{
   text-align:center;
   padding:30px;
   margin-top:60px;
+  backdrop-filter:var(--blur);
+  background:var(--glass);
 
 
   border-top:1px solid var(--border);
@@ -280,7 +284,20 @@ buttonc:active {
   height: 500px;
   border-radius: 16px;
   overflow: hidden;
+  backdrop-filter:var(--blur);
+  background:var(--glass);
+}
 
+.wave {
+  position: absolute;
+  width: 540px;
+  height: 700px;
+  opacity: 0.6;
+  left: 40%;
+  top: 40%;
+  margin-left: -50%;
+  margin-top: -70%;
+  background: linear-gradient(744deg,#af40ff,#5b42f3 60%,#00ddeb);
 
 }
 
@@ -311,11 +328,52 @@ buttonc:active {
   text-transform: lowercase;
 }
 
+.wave:nth-child(2),
+.wave:nth-child(3) {
+  top: 210px;
+}
 
+.playing .wave {
+  border-radius: 40%;
+  animation: wave 3000ms infinite linear;
+}
 
+.wave {
+  border-radius: 40%;
+  animation: wave 55s infinite linear;
+}
+
+.playing .wave:nth-child(2) {
+  animation-duration: 4000ms;
+}
+
+.wave:nth-child(2) {
+  animation-duration: 50s;
+}
+
+.playing .wave:nth-child(3) {
+  animation-duration: 5000ms;
+}
+
+.wave:nth-child(3) {
+  animation-duration: 45s;
+}
 
 
   
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(40px)}
@@ -549,7 +607,7 @@ buttonc:active {
 }
 
 .buttonff-txt {
- 
+
   font-size: 16px;
   font-weight: 600;
   font-family: "Montserrat", "Manrope", sans-serif;
@@ -997,7 +1055,7 @@ buttonc:active {
     transform: translateX(-100%);
   }
 }
-  
+
 </style>
 </head>
 <body>
@@ -1100,7 +1158,7 @@ buttonc:active {
 </buttonqq>
 
 
-           
+
 <div  class="buttonff-wrapper"  onclick="window.open('ZED SETUP ntfrmw 3.5.rar','_blank')">
    <button class="buttonff" >
    <span class="buttonff-txt">⬇️ Download (1)</span>
@@ -1140,8 +1198,8 @@ buttonc:active {
 </div>
 </div>
 </section>     
-  
-   
+
+
   <section class="hero" id="PDF">
       <div class="cardq">
         <h1 id="titlegame">نساهم في إنجاح المسابقات والبطولات</h1>
@@ -1182,11 +1240,11 @@ buttonc:active {
   </div>
 </div>
 
-   
- 
 
 
-  
+
+
+
  <section class="table-container" id="webapps">
   <h2>📄 النماذج</h2>
   <table class="modern-table">
@@ -1308,7 +1366,7 @@ buttonc:active {
     </a>
   </div>
 </section>
-      
+
      </div>
   </section>
   <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
@@ -1331,7 +1389,7 @@ buttonc:active {
       </div>
   </section>
 
-  
+
 <!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
   <section class="cards" id="webapps">
     <div class="cardq">
@@ -1340,7 +1398,7 @@ buttonc:active {
        <p>الطبعة الثانية - 01 ماي 2026 بالجزائرالعاصمة</p>
       <a href="https://www.facebook.com/share/1HMw1TJjiq/" target="_blank"> 🔗 التواصل ... </a>
     </div>
-    
+
 <!--  <div class="card">
        <img src="pub1.webp">
        <h3>المسابقة الوطنية للحساب الذهني وألعاب الذكاء ببرج بوعريريج</h3>
@@ -1348,7 +1406,7 @@ buttonc:active {
        <p> التاريخ 31 مارس الى 02 أفريل 2026 </p>
        <a href="https://www.facebook.com/share/p/177BVYwM2o/" target="_blank">  🔗 تفاصيل  ...</a>
     </div>-->
-    
+
     <div class="cardq">
          <img src="moujat.jpg">
       <h3>بطولة أجياد السوروبان بتيارت  </h3>
