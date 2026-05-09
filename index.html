@@ -129,6 +129,7 @@ nav ul a:hover{
   opacity:1;
   font-size:1.15rem;
 }
+  
 /* ===== VIDEO ===== */
 .video-background{
   position:fixed;
@@ -146,15 +147,12 @@ nav ul a:hover{
 }
 /* ===== CARD ===== */
 .card{
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  backdrop-filter:var(--blur);
-  padding:26px;
-  text-align:center;
-  box-shadow:0 30px 80px rgba(0,0,0,.35);
-  transition:.45s cubic-bezier(.2,.8,.2,1);
-  animation:fadeUp .9s ease both;
+ width: 190px;
+ height: 254px;
+ border-radius: 50px;
+ background: #e0e0e0;
+ box-shadow: 20px 20px 60px #bebebe,
+               -20px -20px 60px #ffffff;
 }
 .card:hover{
   transform:translateY(-10px) scale(1.02);
