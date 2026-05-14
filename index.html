@@ -282,7 +282,7 @@ cardf{
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;  
   width: 190px;
-  height: 199px;
+  height: 160px;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -820,20 +820,19 @@ cardf{
   animation:fadeUp .9s ease both;
 }
 * Hidden before scrolling */
-
-.hidden{
+.scroll-card{
     opacity:0;
-    transform:translateY(40px);
-    transition:all 0.6s ease;
+    transform:translateY(60px) scale(0.95);
 }
 
-/* Visible after scrolling */
+/* Visible only on screen */
 
-.show{
+.scroll-card.active{
     opacity:1;
-    transform:translateY(0);
+    transform:translateY(0) scale(1);
 }
 
+    
 
 .cardq:active {
   transform: scale(0.95) rotateZ(1.7deg);
@@ -1231,11 +1230,11 @@ cardf{
     
   <!-- Cards -->
   <section class="cards" id="description">
-    <div class="cardq hidden">
+    <div class="cardq scroll-card">
     <h3 id="card1">ابدأ رحلتك الآن</h3>
     <img src="poster.jpg">
          </div>
-         <div class="cardq hidden" id="download">
+         <div class="cardq scroll-card" id="download">
          <h3 id="card3">تحميل على الحاسوب ويندوز</h3>
          <img src="pro.PNG" alt="Kids Learning"> 
          <div style="height:20px;"></div>
@@ -1295,7 +1294,7 @@ cardf{
 </div>
 </div>
 </div>
-      <div class="cardq hidden" >
+      <div class="cardq scroll-card" >
       <h3 id="card4">تحميل للهاتف أندرويد</h3>
       <img src="tel.PNG">
       <p id="text4">تحميل نسخة الأندرويد للهاتف</p>
@@ -1322,7 +1321,7 @@ cardf{
 
 
   <section class="hero" id="PDF">
-      <div class="cardq hidden">
+      <div class="cardq scroll-card">
         <h1 id="titlegame">نساهم في إنجاح المسابقات والبطولات</h1>
         <p id="subtitlegame">من خلال تنشيط فقرة فلاش أنزان الشيقة وكذا توفير نماذج اختبارات السوروبان المطبوعة بمختلف المستويات ومشفرة بتقنية الكيو آر QR باستخدام منصة زاد سوروبان</p>
       </div>
@@ -1434,7 +1433,7 @@ cardf{
 
     <!--   -->
     <section class="hero" id="games">
-  <div class="cardq hidden">
+  <div class="cardq scroll-card">
     <h1 id="titlegame">ألعاب ذكاء مقترحة</h1>
 
     <p id="subtitlegame">
@@ -1487,7 +1486,7 @@ cardf{
   <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
 
   <section class="hero" id="contact">
-      <div class="cardq hidden">
+      <div class="cardq scroll-card">
        <h1 id="titlecontact">تواصل معنا</h1>
        <p id="subtitlecontact">يمكنك التواصل مع فريق الدعم عبر فيسبوك كما يمكنك الإنضمام إلى مجموعة زاد سوروبان على مسنجر، مجموعة تليغرام فيها شروحات متعددة</p>
 
@@ -1521,7 +1520,7 @@ cardf{
 <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
 
   <section class="hero" id="pub">
-      <div class="cardq hidden">
+      <div class="cardq scroll-card">
           <h1 id="titlepub">مساحة مخصصة لإعلاناتكم</h1>
     <p id="subtitlepub">خصصنا لكم هذه المساحة لاستقبال إعلاناتكم حتى يتسنى مشاركتها وانتشارها </p>
       </div>
@@ -1530,7 +1529,7 @@ cardf{
 
 <!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
   <section class="cards" id="webapps">
-    <div class="cardq hidden">
+    <div class="cardq scroll-card">
           <img src="p1.png" >
       <h3> نجوم السوروبان، تنظيم الكوتش زردومي أحمد و الكوتش ل فهيمة </h3>
        <p>الطبعة الثانية - 01 ماي 2026 بالجزائرالعاصمة</p>
@@ -1545,7 +1544,7 @@ cardf{
        <a href="https://www.facebook.com/share/p/177BVYwM2o/" target="_blank">  🔗 تفاصيل  ...</a>
     </div>-->
 
-    <div class="cardq hidden">
+    <div class="cardq scroll-card">
          <img src="moujat.jpg">
       <h3>بطولة أجياد السوروبان بتيارت  </h3>
        <p>من تنظيم المدربة كاتبي خديجة </p>
@@ -1553,7 +1552,7 @@ cardf{
       <a href="https://web.facebook.com/ilyass.soroban" target="_blank"> 🔗 التواصل ...</a>
     </div>
 
-    <div class="cardq hidden">
+    <div class="cardq scroll-card">
          <img src="Raw.webp">
       <h3> بانر أكاديمي باتنة </h3>
        <p> 🚀 لأول مرة… بين يديك مجموعة كتب متكاملة لتعليم الحساب الذهني!
@@ -1632,16 +1631,20 @@ function goToLink(id, url) {
 
 
 
-const hiddenElements = document.querySelectorAll('.hidden');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if(entry.isIntersecting){
-            entry.target.classList.add('show');
+const cards = document.querySelectorAll(".scroll-card");
+window.addEventListener("scroll", revealCards);
+revealCards();
+function revealCards(){
+    const triggerBottom = window.innerHeight * 0.85;
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if(cardTop < triggerBottom){
+            card.classList.add("active");
+        }else{
+            card.classList.remove("active");
         }
     });
-});
-hiddenElements.forEach((el) => observer.observe(el));
-
+}
       
   </script>
 </body>
