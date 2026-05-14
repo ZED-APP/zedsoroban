@@ -1073,6 +1073,96 @@ cardf{
   }
 }
 
+
+
+
+
+/* IOS STYLE GAME ICONS */
+
+.games-section{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.game-app{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-decoration:none;
+    transition:0.25s;
+}
+
+.game-app:hover{
+    transform:scale(1.08);
+}
+
+.game-icon{
+    width:90px;
+    height:90px;
+
+    border-radius:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:40px;
+    color:white;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.18),
+    inset 0 2px 5px rgba(255,255,255,0.25);
+
+    margin-bottom:10px;
+}
+
+/* App names */
+
+.game-app span{
+    color:white;
+    font-size:14px;
+    font-weight:600;
+    text-align:center;
+    max-width:110px;
+    line-height:1.4;
+}
+
+/* Colors */
+
+.blue{
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+}
+
+.cyan{
+    background:linear-gradient(135deg,#43cea2,#185a9d);
+}
+
+.green{
+    background:linear-gradient(135deg,#43e97b,#38f9d7);
+}
+
+.pink{
+    background:linear-gradient(135deg,#fa709a,#fee140);
+}
+
+.purple{
+    background:linear-gradient(135deg,#30cfd0,#330867);
+}
+
+.orange{
+    background:linear-gradient(135deg,#f7971e,#ffd200);
+}
+
+.violet{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.yellow{
+    background:linear-gradient(135deg,#f6d365,#fda085);
+}
+    
 </style>
 </head>
 <body>
@@ -1328,71 +1418,60 @@ cardf{
     </tbody>
   </table>
 </section>
-  <section class="hero" id="games">
-    <div class="cardq">
-      <h1 id="titlegame">ألعاب ذكاء مقترحة</h1>
-      <p id="subtitlegame">إليك بعض ألعاب الذكاء التي قمنا بإضافتها، يمكنك استخدامها في تدريباتك وتنويع أنشطتك</p>
-     <!-- ⭐⭐⭐ NEW SECTION ADDED: WEB APPS ⭐⭐⭐ -->
 
-<section id="games" style="padding:20px; font-family:sans-serif;">
-  <div style="
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-    gap:15px;
-  ">
-    <a href="https://zed-app.github.io/3D-ZED-Flash-Anzan/"target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       3D ZED Flash Anzan
-    </a>
-    <a href="https://zed-app.github.io/Guess-the-Number/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#4facfe,#00f2fe);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Guess the Number
-    </a>
-    <a href="https://zed-app.github.io/hectoc/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#43e97b,#38f9d7);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Hectoc
-    </a>
-    <a href="https://zed-app.github.io/memory/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#fa709a,#fee140);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Memory
-    </a>
-    <a href="https://zed-app.github.io/xoxo/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#30cfd0,#330867);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       XOXO
-    </a>
-    <a href="https://zed-app.github.io/Random-math-question/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#f7971e,#ffd200);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Random Math Question
-    </a>
-    <a href="https://zed-app.github.io/sodoku/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Sudoku
-    </a>
-    <a href="https://zed-app.github.io/bee/" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;height:100px;
-       background:linear-gradient(135deg,#ff9a9e,#fecfef);color:#fff;
-       border-radius:12px;text-decoration:none;font-weight:bold;">
-       Spelling Bee
-    </a>
+
+    <!--   -->
+    <section class="hero" id="games">
+  <div class="cardq">
+    <h1 id="titlegame">ألعاب ذكاء مقترحة</h1>
+
+    <p id="subtitlegame">
+      إليك بعض ألعاب الذكاء التي قمنا بإضافتها، يمكنك استخدامها في تدريباتك وتنويع أنشطتك
+    </p>
+
+    <section class="games-section">
+      <a href="https://zed-app.github.io/3D-ZED-Flash-Anzan/" target="_blank" class="game-app">
+        <div class="game-icon blue">🧠</div>
+        <span>3D ZED Flash Anzan</span>
+      </a>
+
+      <a href="https://zed-app.github.io/Guess-the-Number/" target="_blank" class="game-app">
+        <div class="game-icon cyan">🎯</div>
+        <span>Guess the Number</span>
+      </a>
+
+      <a href="https://zed-app.github.io/hectoc/" target="_blank" class="game-app">
+        <div class="game-icon green">💯</div>
+        <span>Hectoc</span>
+      </a>
+
+      <a href="https://zed-app.github.io/memory/" target="_blank" class="game-app">
+        <div class="game-icon pink">🃏</div>
+        <span>Memory</span>
+      </a>
+
+      <a href="https://zed-app.github.io/xoxo/" target="_blank" class="game-app">
+        <div class="game-icon purple">❌</div>
+        <span>XOXO</span>
+      </a>
+
+      <a href="https://zed-app.github.io/Random-math-question/" target="_blank" class="game-app">
+        <div class="game-icon orange">➗</div>
+        <span>Random Math</span>
+      </a>
+
+      <a href="https://zed-app.github.io/sodoku/" target="_blank" class="game-app">
+        <div class="game-icon violet">🔢</div>
+        <span>Sudoku</span>
+      </a>
+
+      <a href="https://zed-app.github.io/bee/" target="_blank" class="game-app">
+        <div class="game-icon yellow">🐝</div>
+        <span>Spelling Bee</span>
+      </a>
+    </section>
   </div>
 </section>
-
-     </div>
-  </section>
   <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
 
   <section class="hero" id="contact">
