@@ -1,4 +1,4 @@
-      <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -282,7 +282,7 @@ cardf{
   transition: all 0.3s;
   box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;  
   width: 190px;
-  height: 170px;
+  height: 199px;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -388,7 +388,7 @@ cardf{
 }
 
 
-  
+
 @keyframes wave {
   0% {
     transform: rotate(0deg);
@@ -799,16 +799,34 @@ cardf{
 #bfbf{
 }
 
+
+
+
+
+
+
   .cardq {
-  margin: 100px auto;
-  box-shadow: 0px 8px 28px -9px rgba(0,0,0,0.45);
-  position: relative;
-  width: 90%;
-  height: 500px;
-  border-radius: 16px;
-  overflow: hidden;
-  backdrop-filter:var(--blur);
-  background:var(--glass);
+  box-sizing: border-box;
+  background: rgba(217, 217, 217, 1);
+  border: 1px solid white;
+  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  user-select: none;
+  color: black;
+  padding:26px;
+  text-align:center;
+  transition:.45s cubic-bezier(.2,.8,.2,1);
+  animation:fadeUp .9s ease both;
+}
+
+
+
+.cardq:active {
+  transform: scale(0.95) rotateZ(1.7deg);
 }
 
   .cardq img{
@@ -1378,13 +1396,13 @@ cardf{
   </section>
   <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
 
-  <section class="table-container" id="contact">
+  <section class="hero" id="contact">
       <div class="cardq">
        <h1 id="titlecontact">تواصل معنا</h1>
        <p id="subtitlecontact">يمكنك التواصل مع فريق الدعم عبر فيسبوك كما يمكنك الإنضمام إلى مجموعة زاد سوروبان على مسنجر، مجموعة تليغرام فيها شروحات متعددة</p>
 
 
-<section class="table-container" id="webapps" style="
+<section class="cards" id="webapps" style="
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
     gap:15px;
@@ -1406,7 +1424,7 @@ cardf{
             <a href="https://t.me/+YPWQ_CnoLSZhNjFk" target="_blank"> 🔗 ZED Soroban</a> 
       </cardf> 
 </section> <!-- ⭐⭐⭐ END OF NEW SECTION ⭐⭐⭐ -->
-            
+
 </div>
   </section>
 <!-- puuuuuub ************************************************************************************************** -->
