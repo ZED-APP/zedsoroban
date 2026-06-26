@@ -1183,7 +1183,13 @@ cardf{
     font-size:16px;
     cursor:pointer;
 }
-
+.containerpl{
+    display:flex;
+    justify-content:center;   /* Horizontal center */
+    align-items:center;       /* Vertical center */
+    width:100%;
+    height:300px;             /* or 100vh if full screen */
+}
 .progress-container{
     flex:1;
     height:6px;
@@ -1249,15 +1255,19 @@ cardf{
 زاد سوروبان - ZED Soroban
 </h1>
 <div class="name">تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار</div>
-<div class="mini-player">
-    <button id="playPause">▶</button>
-    <div class="progress-container">
-        <div class="progress" id="progress"></div>
+      <br>
+      <br>
+<div class="containerpl">
+    <div class="mini-player">
+        <button id="playPause">▶</button>
+        <div class="progress-container">
+            <div class="progress" id="progress"></div>
+        </div>
+        <span id="time">00:00</span>
+        <audio id="audio">
+            <source src="me.mp3" type="audio/mpeg">
+        </audio>
     </div>
-    <span id="time">00:00</span>
-    <audio id="audio">
-        <source src="me.mp3" type="audio/mpeg">
-    </audio>
 </div>
   </div>
 </div>
