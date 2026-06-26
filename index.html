@@ -1158,6 +1158,53 @@ cardf{
 
 
 
+
+
+    .mini-player{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:320px;
+    height:42px;
+    background:#ffffff;
+    border-radius:25px;
+    padding:8px 12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+    font-family:Arial;
+}
+
+#playPause{
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:50%;
+    background:#2196F3;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.progress-container{
+    flex:1;
+    height:6px;
+    background:#ddd;
+    border-radius:5px;
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.progress{
+    width:0%;
+    height:100%;
+    background:#2196F3;
+}
+
+#time{
+    font-size:12px;
+    color:#555;
+    min-width:42px;
+}
+
     
 </style>
 </head>
@@ -1203,6 +1250,18 @@ cardf{
 </h1>
 <div class="name">تعلم الحساب الذهني على الطريقة اليابانية باستخدام السوروبان. منصة تفاعلية ممتعة وتعليمية للأطفال والكبار</div>
   </div>
+
+<div class="mini-player">
+    <button id="playPause">▶</button>
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+    <span id="time">00:00</span>
+    <audio id="audio">
+        <source src="me.mp3" type="audio/mpeg">
+    </audio>
+</div>
+    
 </div>
   </section>
     <video class="video-background" autoplay muted loop playsinline>
@@ -1688,7 +1747,38 @@ function revealCards(){
         }
     });
 }
-      
+
+
+const audio=document.getElementById("audio");
+const play=document.getElementById("playPause");
+const progress=document.getElementById("progress");
+const container=document.querySelector(".progress-container");
+const time=document.getElementById("time");
+play.onclick=()=>{
+    if(audio.paused){
+        audio.play();
+        play.innerHTML="⏸";
+    }else{
+        audio.pause();
+        play.innerHTML="▶";
+    }
+};
+audio.addEventListener("timeupdate",()=>{
+   let percent=(audio.currentTime/audio.duration)*100;
+   progress.style.width=percent+"%";
+    let m=Math.floor(audio.currentTime/60);
+    let s=Math.floor(audio.currentTime%60);
+    if(s<10)s="0"+s;
+    time.innerHTML=m+":"+s;
+});
+container.onclick=(e)=>{
+    const width=container.clientWidth;
+    const click=e.offsetX;
+    audio.currentTime=(click/width)*audio.duration;
+};
+audio.onended=()=>{
+    play.innerHTML="▶";
+};
   </script>
 </body>
 </html>
